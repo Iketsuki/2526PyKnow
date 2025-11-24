@@ -245,10 +245,43 @@ dict.copy()  # Shallow copy
 - Analyze: Compare `.pop()` vs `del`.
 - Create: Build frequency analyzer for any text.
 
-## Common Errors
-- Using `dict[key]` without checking → Use `.get()`.
-- Forgetting `.copy()` when copying → Modifies original.
-- Iterating with `dict[key]` instead of `.items()` → Less efficient.
+## Common Errors with Example Code
+
+1) Using `dict[key]` without checking → KeyError if missing (use `.get()`)
+
+WRONG
+student = {'name': 'Alice', 'age': 14}
+grade = student['grade']  # KeyError if missing!
+
+CORRECT
+student = {'name': 'Alice', 'age': 14}
+grade = student.get('grade', 'N/A')  # Safely returns default
+
+2) Forgetting `.copy()` when copying → Modifies original dict
+
+WRONG
+original = {'name': 'Alice', 'score': 95}
+copy = original  # This is a reference, not a copy!
+copy['score'] = 100
+print(original['score'])  # 100 (oops, modified original!)
+
+CORRECT
+original = {'name': 'Alice', 'score': 95}
+copy = original.copy()  # True copy
+copy['score'] = 100
+print(original['score'])  # 95 (original unchanged)
+
+3) Iterating incorrectly → `.items()` for key-value pairs
+
+WRONG
+student = {'name': 'Alice', 'age': 14}
+for key in student:
+    print(student[key])  # Works but looks up key each time
+
+CORRECT
+student = {'name': 'Alice', 'age': 14}
+for key, value in student.items():
+    print(f'{key}: {value}')  # Direct access, more efficient
 
 ## Related Concepts
 - [[Python - Dicts - Creation & Initialization]]

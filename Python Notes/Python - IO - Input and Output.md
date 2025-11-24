@@ -254,11 +254,57 @@ f'{3.14:.2f}'  # 2 decimal places
 - Analyze: Compare print() with print(end='').
 - Create: Build interactive quiz with scoring.
 
-## Common Errors
-- Forgetting input() always returns string → Convert!
-- Printing without converting → Type errors in calculations.
-- `int('3.14')` → ValueError (must use float first).
-- `input()` includes trailing newline → Use `.strip()`.
+## Common Errors with Example Code
+
+Here are common mistakes when using `input()` and `print()`, with fixes.
+
+1) Forgetting that `input()` returns a string
+
+WRONG
+```python
+age = input('Enter age: ')
+print(age + 5)  # TypeError: can only concatenate str (not "int") to str
+```
+
+CORRECT
+```python
+age = int(input('Enter age: '))  # convert explicitly after validation
+print(age + 5)
+```
+
+2) Using int() improperly on floating text
+
+WRONG
+```python
+value = int('3.14')  # ValueError
+```
+
+CORRECT
+```python
+value = float('3.14')
+value = int(value)  # if you really need an int
+```
+
+3) Not stripping whitespace from input
+
+WRONG
+```python
+name = input('Enter your name: ')
+if name == 'Alice':
+    print('Welcome Alice')
+```
+
+CORRECT
+```python
+name = input('Enter your name: ').strip()
+if name.lower() == 'alice':
+    print('Welcome Alice')
+```
+
+Short tips:
+- Always validate and convert input explicitly.
+- Use `strip()` and `lower()` when comparing user strings.
+- Wrap conversions in try/except or re-prompt the user when invalid.
 
 ## Related Concepts
 - [[Python - Variables & Types - Type Conversion]]

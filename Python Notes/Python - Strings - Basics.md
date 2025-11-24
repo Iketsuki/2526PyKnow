@@ -176,10 +176,47 @@ else:
 - Analyze: Difference between mutable lists and immutable strings.
 - Create: Build formatted message from data.
 
-## Common Errors
-- Mismatched quotes: `'Hello"` won't work.
-- Trying to change string: `text[0] = 'X'` fails.
-- Forgetting newline: `\n` not just new line in code.
+## Common Errors with Example Code
+
+1) Mismatched quotes and escaping
+
+WRONG
+```python
+text = 'He said "Hello'  # mismatched quotes -> SyntaxError
+```
+
+CORRECT
+```python
+text = 'He said "Hello"'  # Escape inner quotes or use matching pairs
+text = "He said 'Hello'"  # Or use the other quote style
+```
+
+2) Trying to modify a string in-place (strings are immutable)
+
+WRONG
+```python
+text = 'Hello'
+text[0] = 'J'  # TypeError: 'str' object does not support item assignment
+```
+
+CORRECT
+```python
+text = 'Hello'
+text = 'J' + text[1:]  # Create a new string instead
+print(text)  # Jello
+```
+
+3) Misunderstanding escape sequences (newlines, tabs)
+
+WRONG
+```python
+print('Line1\nLine2')  # If you forget \n it won't add a newline
+```
+
+CORRECT
+```python
+print('Line1\nLine2')  # Use \n for new line, or triple-quoted strings for multi-line
+```
 
 ## Related Concepts
 - [[Python - Strings - String Methods]]

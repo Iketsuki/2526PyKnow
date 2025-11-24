@@ -30,8 +30,60 @@ print(name, age, height)
 - Analyze: What happens if you assign to the same variable twice?
 - Create: Build a program that stores and combines multiple variables.
 
-## Common Errors
-- Confusing `=` (assignment) with `==` (comparison).
+## Common Errors with Example Code
+
+1) Confusing assignment (`=`) with comparison (`==`)
+
+WRONG
+```python
+if x = 5:  # SyntaxError: can't assign in expression
+  print('x is 5')
+```
+
+CORRECT
+```python
+x = 5
+if x == 5:
+  print('x is 5')
+```
+
+2) Thinking assignment returns a value (no chaining like some languages)
+
+WRONG
+```python
+if (x = get_value()):  # SyntaxError in Python
+  print('Got value')
+```
+
+CORRECT
+```python
+x = get_value()
+if x:
+  print('Got value')
+```
+
+3) Unintended shadowing or reassignment
+
+WRONG
+```python
+count = 10
+def foo():
+  count = count + 1  # UnboundLocalError if you expect to modify global
+  return count
+
+foo()
+```
+
+CORRECT
+```python
+count = 10
+def foo():
+  global count
+  count = count + 1
+  return count
+
+foo()
+```
 
 ## Related Concepts
 - [[Python - Variables - Types Basics]]

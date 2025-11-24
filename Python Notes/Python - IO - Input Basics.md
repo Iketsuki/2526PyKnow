@@ -35,9 +35,61 @@ age = int(age_str)  # Convert to integer
 - Analyze: What happens if you try `int(input('number?'))` and the user types "hello"?
 - Create: Build a small program that gathers 3 pieces of info from the user and combines them.
 
-## Common Errors
-- Forgetting that input returns a string, not a number.
-- Trying to do math with string numbers without converting.
+## Common Errors with Example Code
+
+1) Forgetting `input()` returns a string (type errors)
+
+WRONG
+```python
+age = input('Age: ')
+next_age = age + 1  # TypeError: can only concatenate str (not "int") to str
+```
+
+CORRECT
+```python
+age = int(input('Age: '))
+next_age = age + 1
+print(next_age)
+```
+
+2) Assuming input is clean (whitespace, wrong types)
+
+WRONG
+```python
+name = input('Name: ')
+if name == 'Alice':  # fails if user types 'Alice ' with space
+    print('Welcome!')
+```
+
+CORRECT
+```python
+name = input('Name: ').strip().lower()
+if name == 'alice':
+    print('Welcome!')
+```
+
+3) Not validating numeric input (ValueError)
+
+WRONG
+```python
+score = int(input('Score: '))  # crashes if user types 'high'
+print(score)
+```
+
+CORRECT
+```python
+while True:
+    try:
+        score = int(input('Score: '))
+        break
+    except ValueError:
+        print('Please enter a number')
+```
+
+Short tips:
+- Always convert `input()` result to the type you need.
+- Use `.strip()` and `.lower()` for string comparison.
+- Validate and re-prompt if input is invalid.
 
 ## Related Concepts
 - [[Python - IO - Print Basics]]

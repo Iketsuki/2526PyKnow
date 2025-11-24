@@ -54,9 +54,55 @@ print(f'Total: ${total_earnings}')
 - Analyze: Compare 30% off vs "pay 70%" — are they the same?
 - Create: Build a discount calculator app that asks price and percentage.
 
-## Tips
-- To increase by 20%: `value * 1.20`.
-- To decrease by 20%: `value * 0.80`.
+## Common Errors with Example Code
+
+1) Wrong discount formula → Subtracting discount rate instead of multiplying
+
+WRONG
+price = 100
+discount_percent = 20
+sale_price = price - discount_percent  # 80 (wrong! this is just subtracting 20)
+
+CORRECT
+price = 100
+discount_percent = 20
+sale_price = price * (1 - discount_percent / 100)
+print(sale_price)  # 80.0 (correct: 20% off)
+
+2) Forgetting to convert percentage to decimal → Using 20 instead of 0.20
+
+WRONG
+price = 50
+discount_percent = 30
+# Forgetting to divide by 100:
+sale_price = price * (1 - discount_percent)  # Negative!
+print(sale_price)  # -1000 (oops!)
+
+CORRECT
+price = 50
+discount_percent = 30
+sale_price = price * (1 - discount_percent / 100)  # Divide by 100
+print(sale_price)  # 35.0
+
+3) Confusing increase vs decrease → Using 1 + rate for discounts (wrong!)
+
+WRONG
+original = 100
+discount = 20
+# Using 1 + rate increases, doesn't decrease:
+result = original * (1 + discount / 100)
+print(result)  # 120 (increased, not discounted!)
+
+CORRECT
+original = 100
+discount = 20
+result = original * (1 - discount / 100)  # Use 1 - for decrease
+print(result)  # 80.0
+
+# For increase (bonus):
+bonus = 10
+with_bonus = original * (1 + bonus / 100)
+print(with_bonus)  # 110.0
 
 ## Related Concepts
 - [[Python - Math - Money & Budget]]

@@ -29,8 +29,50 @@ print('{} is {} years old.'.format(name, age))
 - Analyze: F-strings vs concatenation.
 - Create: Build formatted output for data.
 
-## Common Errors
-- Forgetting the `f` prefix.
+## Common Errors with Example Code
+
+1) Forgetting the `f` prefix (no interpolation)
+
+WRONG
+```python
+name = 'Alice'
+print('Hello {name}')  # prints the literal {name}, not the value
+```
+
+CORRECT
+```python
+name = 'Alice'
+print(f'Hello {name}')  # Hello Alice
+```
+
+2) Wrong format specifier for numbers
+
+WRONG
+```python
+price = 3.14159
+print(f'Price: {price:.2}')  # incorrect specifier, may raise ValueError
+```
+
+CORRECT
+```python
+price = 3.14159
+print(f'Price: {price:.2f}')  # Price: 3.14
+```
+
+3) Nested quotes inside f-strings
+
+WRONG
+```python
+name = "O'Connor"
+print(f"Hello {name's}")  # SyntaxError or confusing quoting
+```
+
+CORRECT
+```python
+name = "O'Connor"
+print(f"Hello {name}'s")   # Use correct quoting or escape
+print(f'Hello {name}\'s')  # or escape the quote
+```
 
 ## Related Concepts
 - [[Python - Strings - Basics]]

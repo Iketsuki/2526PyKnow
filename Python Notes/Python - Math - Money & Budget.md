@@ -58,6 +58,71 @@ print(f'You need {months_needed} more months to reach your goal.')
 - Analyze: Compare saving $10/month vs $15/month over a year.
 - Create: Build a budget app that asks income and expenses.
 
+## Common Errors with Example Code
+
+1) Not rounding money (floating-point precision issues)
+
+WRONG
+```python
+balance = 10.00
+balance = balance - 3.33
+balance = balance - 3.33
+balance = balance - 3.33
+print(f'${balance}')  # $0.0100000000000002 (ugh!)
+```
+
+CORRECT
+```python
+balance = 10.00
+balance = balance - 3.33
+balance = balance - 3.33
+balance = balance - 3.33
+balance = round(balance, 2)
+print(f'${balance:.2f}')  # $0.01
+```
+
+2) Mixing integers and floats without care (unexpected results)
+
+WRONG
+```python
+total_spent = 50  # integer
+items = [10.99, 20.50, 15.25]
+total = total_spent + sum(items)
+print(total)  # 96.74 (mixed types work but unclear)
+```
+
+CORRECT
+```python
+total_spent = 50.00  # explicit float
+items = [10.99, 20.50, 15.25]
+total = total_spent + sum(items)
+total = round(total, 2)
+print(f'${total:.2f}')  # $96.74
+```
+
+3) Not checking for division by zero (crashes when budget is empty)
+
+WRONG
+```python
+total_expenses = []
+average = sum(total_expenses) / len(total_expenses)  # ZeroDivisionError
+```
+
+CORRECT
+```python
+total_expenses = []
+if total_expenses:
+    average = sum(total_expenses) / len(total_expenses)
+else:
+    average = 0.00
+print(f'Average: ${average:.2f}')
+```
+
+Short tips:
+- Always use floats for money amounts.
+- Round to 2 decimals when displaying currency.
+- Check for empty lists before dividing.
+
 ## Tips
 - Use `.2f` for clean currency display: `f'${amount:.2f}'`.
 

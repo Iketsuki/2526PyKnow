@@ -33,8 +33,54 @@ decimal = float(num)          # Cast to float
 - Analyze: What happens if you `int('hello')`?
 - Create: Build a program that takes string input and does math.
 
-## Common Errors
-- Casting invalid strings (e.g., `int('3.5')` fails; use `float()` first).
+## Common Errors with Example Code
+
+1) Casting invalid strings (ValueError)
+
+WRONG
+```python
+value = '3.5'
+num = int(value)  # ValueError: invalid literal for int() with base 10
+```
+
+CORRECT
+```python
+value = '3.5'
+num = float(value)  # 3.5
+num_int = int(num)  # 3 (explicit conversion from float)
+```
+
+2) Passing non-numeric strings to numeric casts
+
+WRONG
+```python
+value = 'abc'
+num = int(value)  # ValueError
+```
+
+CORRECT
+```python
+value = 'abc'
+try:
+  num = int(value)
+except ValueError:
+  print('Please enter a valid integer')
+```
+
+3) Assuming `input()` returns numbers
+
+WRONG
+```python
+age = input('Age: ')
+print(age + 1)  # TypeError: can only concatenate str (not "int") to str
+```
+
+CORRECT
+```python
+age = input('Age: ')
+age = int(age)
+print(age + 1)
+```
 
 ## Related Concepts
 - [[Python - Variables - Types Basics]]

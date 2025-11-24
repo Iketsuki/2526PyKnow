@@ -37,5 +37,57 @@ else:
 - Use clear prompts so the user knows what to enter.
 - Organize steps logically: ask all input first, then display results, or alternate as needed.
 
+## Common Errors with Example Code
+
+1) Converting input without validation (ValueError)
+
+WRONG
+```python
+answer = input('What is 2 + 2? ')
+result = int(answer)  # crashes if user types 'four' or leaves blank
+```
+
+CORRECT
+```python
+while True:
+  try:
+    answer = input('What is 2 + 2? ')
+    result = int(answer)
+    break
+  except ValueError:
+    print('Please enter a whole number (e.g. 4)')
+print('You entered', result)
+```
+
+2) Not prompting clearly (user confusion / empty inputs)
+
+WRONG
+```python
+name = input('Name: ')  # unclear: maybe first and last needed
+```
+
+CORRECT
+```python
+name = input('Enter your full name (first and last): ').strip()
+if not name:
+  name = 'Guest'
+```
+
+3) Writing to files without using context manager (file not closed / data loss)
+
+WRONG
+```python
+f = open('out.txt', 'w')
+f.write('Hello')
+# forgot f.close()
+```
+
+CORRECT
+```python
+with open('out.txt', 'w', encoding='utf-8') as f:
+  f.write('Hello')
+# file closed automatically
+```
+
 ## MOC
 - Parent: [[Python - IO (MOC)]]

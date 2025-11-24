@@ -251,11 +251,82 @@ list.copy()  # Make independent copy
 - Analyze: Compare `.sort()` (in-place) vs `sorted()` (new list).
 - Create: Build grade analyzer with min/max/median.
 
-## Common Errors
-- Forgetting `.copy()` → List stays connected to original.
-- Using `.remove()` when value doesn't exist → ValueError.
-- Modifying list while iterating → Skip items.
-- `.append([1,2])` vs `.extend([1,2])` → Different structures.
+## Common Errors with Example Code
+
+1) Copy vs assignment (unexpected shared reference)
+
+WRONG
+```python
+original = [1, 2, 3]
+copy = original
+copy.append(4)
+print(original)  # [1, 2, 3, 4] — original modified unexpectedly
+```
+
+CORRECT
+```python
+original = [1, 2, 3]
+copy = original.copy()  # or copy = original[:]
+copy.append(4)
+print(original)  # [1, 2, 3] — unchanged
+```
+
+2) Using `remove()` when value may not exist (ValueError)
+
+WRONG
+```python
+items = [1, 2, 3]
+items.remove(5)  # ValueError if 5 not present
+```
+
+CORRECT
+```python
+items = [1, 2, 3]
+if 5 in items:
+    items.remove(5)
+else:
+    print('Value not found')
+```
+
+3) Modifying a list while iterating (skips items / bugs)
+
+WRONG
+```python
+nums = [1, 2, 3, 4]
+for n in nums:
+    if n % 2 == 0:
+        nums.remove(n)
+print(nums)  # Unexpected
+```
+
+CORRECT
+```python
+nums = [1, 2, 3, 4]
+nums = [n for n in nums if n % 2 != 0]
+print(nums)  # [1, 3]
+```
+
+4) Confusing `append()` with `extend()` (nested lists)
+
+WRONG
+```python
+lst = [1, 2]
+lst.append([3, 4])
+print(lst)  # [1, 2, [3, 4]]
+```
+
+CORRECT
+```python
+lst = [1, 2]
+lst.extend([3, 4])
+print(lst)  # [1, 2, 3, 4]
+```
+
+Short tips:
+- Use `.copy()` (or slicing) to clone lists.
+- Check membership before `.remove()` or handle ValueError.
+- Avoid mutating lists while iterating; use comprehensions.
+- Use `append()` for single items, `extend()` for iterables.
 
 ## Related Concepts
 - [[Python - Lists - Indexing & Edge Cases]]

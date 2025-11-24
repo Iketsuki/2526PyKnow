@@ -62,6 +62,85 @@ print(f'Final score: {score}/{len(questions)}')
 - Analyze: How to prevent invalid input?
 - Create: Build a multi-round game with scoring.
 
+## Common Errors with Example Code
+
+1) Not handling invalid input in interactive games (TypeError / ValueError)
+
+WRONG
+```python
+import random
+secret = random.randint(1, 10)
+guess = int(input('Guess: '))  # Crashes if user types 'five'
+if guess == secret:
+    print('Correct!')
+```
+
+CORRECT
+```python
+import random
+secret = random.randint(1, 10)
+while True:
+    try:
+        guess = int(input('Guess: '))
+        if guess == secret:
+            print('Correct!')
+            break
+        else:
+            print('Try again')
+    except ValueError:
+        print('Please enter a number')
+```
+
+2) Infinite loop without proper exit condition
+
+WRONG
+```python
+score = 0
+while True:
+    answer = input('Question: ')
+    if answer == 'correct':
+        score += 1
+    # No way to exit the loop!
+```
+
+CORRECT
+```python
+score = 0
+rounds = 3
+for i in range(rounds):
+    answer = input(f'Question {i+1}: ')
+    if answer == 'correct':
+        score += 1
+print(f'Final score: {score}/{rounds}')
+```
+
+3) Not validating user choices (silent failures or incorrect game flow)
+
+WRONG
+```python
+choice = input('Rock, paper, or scissors? ')
+if choice == 'rock':
+    print('You chose rock')
+# User types 'Rock' or 'ROCK' - doesn't match!
+```
+
+CORRECT
+```python
+valid_choices = ['rock', 'paper', 'scissors']
+while True:
+    choice = input(f'Choose from {valid_choices}: ').lower().strip()
+    if choice in valid_choices:
+        break
+    print('Invalid choice')
+print(f'You chose {choice}')
+```
+
+Short tips:
+- Wrap numeric input in try-except to catch non-numbers.
+- Always validate user input before using it.
+- Use loops to keep asking until valid input is given.
+- Use `.lower().strip()` for case-insensitive, clean input.
+
 ## Related Concepts
 - [[Python - Loops - For Loop Basics]]
 - [[Python - Conditionals - If-Else Basics]]

@@ -224,6 +224,79 @@ except (ValueError, EOFError):
 - Analyze: Compare generic vs specific exceptions.
 - Create: Build robust input function with error handling.
 
+## Common Errors with Example Code
+
+Below are common mistakes when using try-except and exception handling.
+
+1) Catching with a bare except (hides bugs / bad practice)
+
+WRONG
+```python
+try:
+    age = int(input('Age: '))
+except:  # catches EVERYTHING including KeyboardInterrupt
+    print('Error')
+```
+
+CORRECT
+```python
+try:
+    age = int(input('Age: '))
+except ValueError:
+    print('Please enter a number')
+except KeyboardInterrupt:
+    print('User cancelled')
+```
+
+2) Not using the exception variable (lose error info)
+
+WRONG
+```python
+try:
+    result = risky_function()
+except Exception:
+    print('Something went wrong')  # which error?
+```
+
+CORRECT
+```python
+try:
+    result = risky_function()
+except Exception as e:
+    print(f'Error: {e}')
+    print(f'Type: {type(e).__name__}')
+```
+
+3) Not validating after catching (silently fail)
+
+WRONG
+```python
+try:
+    age = int(input('Age: '))
+except ValueError:
+    age = 0  # assumes age is okay now
+    
+# age could still be invalid (negative)
+```
+
+CORRECT
+```python
+while True:
+    try:
+        age = int(input('Age: '))
+        if age < 0:
+            print('Age cannot be negative')
+            continue
+        break
+    except ValueError:
+        print('Please enter a number')
+```
+
+Short tips:
+- Use specific exception types, not bare except.
+- Capture the exception as a variable to inspect it.
+- Re-prompt or validate even after catching an error.
+
 ## Common Errors
 - Catching Exception too broadly (use specific exceptions).
 - Forgetting `except:` clause (indentation errors).

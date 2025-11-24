@@ -139,10 +139,65 @@ while index < len(tasks):
 - Analyze: Compare nested for vs nested while.
 - Create: Build a quiz game (for questions, while validation).
 
-## Common Errors
-- Infinite while loop: condition never becomes false.
-- For loop off-by-one: `range(5)` is 0-4, not 1-5.
-- Forgetting to increment in while: loop never ends.
+## Common Errors with Example Code
+
+1) Creating an infinite while loop (condition never becomes false)
+
+WRONG
+```python
+count = 0
+while count < 5:
+    print(count)
+    # Forgot count += 1 (never increments)
+```
+
+CORRECT
+```python
+count = 0
+while count < 5:
+    print(count)
+    count += 1  # Increment to eventually exit
+```
+
+2) Off-by-one error with range (including wrong end value)
+
+WRONG
+```python
+for i in range(5):
+    print(i)
+# Prints 0, 1, 2, 3, 4 (not 1-5)
+```
+
+CORRECT
+```python
+for i in range(1, 6):  # Start at 1, end before 6
+    print(i)  # 1, 2, 3, 4, 5
+```
+
+3) Modifying loop variable in a for loop (confusion about iteration)
+
+WRONG
+```python
+for i in range(5):
+    print(i)
+    i = 10  # Doesn't affect the loop (i resets)
+```
+
+CORRECT
+```python
+# For loops reassign the variable each iteration
+# To control the loop, use while with manual increment
+count = 0
+while count < 5:
+    print(count)
+    count += 1
+```
+
+Short tips:
+- Use `for` when you know the sequence in advance.
+- Use `while` when the count is unknown or condition-based.
+- Always increment the counter in a while loop.
+- Remember `range(n)` is 0 to n-1, not 1 to n.
 
 ## Related Concepts
 - [[Python - Loops - Loop Control (Break & Continue)]]

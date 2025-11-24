@@ -118,10 +118,46 @@ print(distance)  # 10.3 (approx)
 - Analyze: Compare `abs(-5)` vs `(-5)**2`.
 - Create: Build a distance calculator for points.
 
-## Common Errors
-- `sqrt()` not imported: must do `import math` first.
-- Negative square root: `math.sqrt(-1)` crashes (no real solution).
-- Forgetting power syntax: `16 ** 0.5` not `16 ** 1/2`.
+## Common Errors with Example Code
+
+1) Forgetting to import math module → `math.sqrt()` not available without import
+
+WRONG
+result = math.sqrt(16)  # NameError: name 'math' is not defined
+
+CORRECT
+import math
+result = math.sqrt(16)
+print(result)  # 4.0
+
+2) Taking square root of negative number → No real solution (causes error)
+
+WRONG
+import math
+result = math.sqrt(-1)  # ValueError: math domain error
+
+CORRECT
+import math
+number = -16
+if number >= 0:
+    result = math.sqrt(number)
+else:
+    print('Cannot take sqrt of negative')
+
+3) Wrong exponent for square root → `16 ** 1/2` evaluates wrong (use `16 ** 0.5`)
+
+WRONG
+result = 16 ** 1/2  # = (16 ** 1) / 2 = 8 (wrong!)
+print(result)  # 8
+
+CORRECT
+result = 16 ** 0.5  # = square root
+print(result)  # 4.0
+
+# Or use math.sqrt:
+import math
+result = math.sqrt(16)
+print(result)  # 4.0
 
 ## Related Concepts
 - [[Python - Math - Arithmetic Operators]]

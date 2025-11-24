@@ -126,10 +126,53 @@ else:
 - Analyze: Why use `% 10` to get last digit?
 - Create: Build a score checker (multiples of 10).
 
-## Common Errors
-- Confusing `%` and `/`: `7 / 2` is `3.5`, `7 % 2` is `1`.
-- Modulo with zero: `10 % 0` crashes (can't divide by 0).
-- Negative modulo: `(-7) % 3` is `2` (Python rounds down).
+## Common Errors with Example Code
+
+1) Confusing `/` and `%` operators → Division vs remainder (very different!)
+
+WRONG
+print(7 / 2)   # 3.5 (division - returns decimal)
+print(7 % 2)   # 1 (modulo - returns remainder)
+# Easy to mix these up!
+
+CORRECT
+# Use `/` for division:
+quotient = 7 / 2  # 3.5
+print(quotient)
+
+# Use `%` for remainder:
+remainder = 7 % 2  # 1
+print(remainder)
+
+2) Modulo with zero → Causes ZeroDivisionError (can't divide by 0)
+
+WRONG
+result = 10 % 0  # ZeroDivisionError: integer division or modulo by zero
+
+CORRECT
+divisor = 0
+if divisor != 0:
+    result = 10 % divisor
+else:
+    print('Cannot divide by 0')
+
+3) Negative modulo behavior → Python rounds down (result can be surprising)
+
+WRONG
+# Easy to expect -7 % 3 = -1, but:
+result = (-7) % 3
+print(result)  # 2 (not -1!) - Python rounds toward negative infinity
+
+CORRECT
+# Understand Python's modulo:
+print(7 % 3)    # 1
+print((-7) % 3) # 2 (rounds down)
+print(7 % (-3)) # -2 (rounds down)
+
+# For absolute difference:
+a, b = -7, 3
+remainder = abs(a) % abs(b)
+print(remainder)  # 1
 
 ## Related Concepts
 - [[Python - Math - Arithmetic Operators]]

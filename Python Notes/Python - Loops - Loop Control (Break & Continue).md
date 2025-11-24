@@ -205,10 +205,72 @@ for i in range(5):
 - Analyze: Trace execution with break/continue.
 - Create: Build search game (break on find, continue on invalid).
 
-## Common Errors
-- Forgetting to increment counter in while with break: loop might not progress.
-- Using break inside nested if (works fine, exits loop).
-- Overusing break: often better to use condition in while.
+## Common Errors with Example Code
+
+1) Forgetting to increment counter in while loop with break (infinite loop)
+
+WRONG
+```python
+count = 0
+while True:
+    if count == 5:
+        break
+    print(count)
+    # Forgot: count += 1
+# Infinite loop!
+```
+
+CORRECT
+```python
+count = 0
+while True:
+    if count == 5:
+        break
+    print(count)
+    count += 1  # Must increment
+```
+
+2) Using `break` in nested loop (only exits inner loop)
+
+WRONG
+```python
+for i in range(3):
+    for j in range(3):
+        if j == 1:
+            break  # Only exits j loop, not i!
+    print(f'i={i}')  # Still prints all i values
+```
+
+CORRECT
+```python
+# Need a flag to exit outer loop
+for i in range(3):
+    found = False
+    for j in range(3):
+        if j == 1:
+            found = True
+            break
+    if found:
+        break
+```
+
+3) Confusing `continue` with `break` (continuing instead of exiting)
+
+WRONG
+```python
+for i in range(5):
+    if i == 3:
+        break  # If you meant to skip, use continue!
+    print(i)  # 0, 1, 2 (stops at 3)
+```
+
+CORRECT
+```python
+for i in range(5):
+    if i == 3:
+        continue  # Skip this iteration
+    print(i)  # 0, 1, 2, 4 (skips 3)
+```
 
 ## Related Concepts
 - [[Python - Loops - For vs While]]

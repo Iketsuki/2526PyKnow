@@ -144,10 +144,56 @@ print(medalists)  # ['Alice', 'Bob', 'Charlie']
 - Analyze: Compare `list[0]` vs `list[-1]`.
 - Create: Build score tracker with first/last logic.
 
-## Common Errors
-- Forgetting 0-indexing: `list[1]` is second, not first.
-- Forgetting list has no negative: `list[-0]` is same as `list[0]`.
-- Out-of-bounds without checking: always check length first.
+## Common Errors with Example Code
+
+1) Off-by-one error: forgetting 0-indexing
+
+WRONG
+```python
+fruits = ['apple', 'banana', 'cherry']
+print(fruits[1])  # Expected 'apple' but got 'banana'
+# Index 0 is first, not index 1!
+```
+
+CORRECT
+```python
+fruits = ['apple', 'banana', 'cherry']
+print(fruits[0])  # 'apple' (first item)
+print(fruits[1])  # 'banana' (second item)
+```
+
+2) Accessing out-of-bounds index (IndexError)
+
+WRONG
+```python
+fruits = ['apple', 'banana', 'cherry']
+print(fruits[5])  # IndexError: list index out of range
+```
+
+CORRECT
+```python
+fruits = ['apple', 'banana', 'cherry']
+if len(fruits) > 5:
+    print(fruits[5])
+else:
+    print('Index out of range')
+```
+
+3) Confusing negative indexing limits
+
+WRONG
+```python
+fruits = ['apple', 'banana', 'cherry']
+print(fruits[-10])  # IndexError (only 3 items, so -4 to -1 valid)
+```
+
+CORRECT
+```python
+fruits = ['apple', 'banana', 'cherry']
+print(fruits[-1])  # 'cherry' (last)
+print(fruits[-2])  # 'banana' (second-to-last)
+print(fruits[-3])  # 'apple' (third-to-last)
+```
 
 ## Related Concepts
 - [[Python - Lists - Slicing Patterns]]

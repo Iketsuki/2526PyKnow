@@ -29,8 +29,68 @@ result = add(3, 5)      # 3, 5 are arguments
 - Analyze: What if you pass the wrong number of arguments?
 - Create: Build a function library with various parameters.
 
-## Common Errors
-- Mismatched number of arguments and parameters.
+## Common Errors with Example Code
+
+1) Passing the wrong number of arguments (TypeError)
+
+WRONG
+```python
+def add(a, b):
+    return a + b
+
+result = add(5)  # TypeError: missing 1 required positional argument: 'b'
+```
+
+CORRECT
+```python
+def add(a, b):
+    return a + b
+
+result = add(5, 3)  # Pass both arguments
+print(result)  # 8
+```
+
+2) Confusing parameter names with variable names (NameError)
+
+WRONG
+```python
+def greet(name):
+    print('Hello,', person)  # person is not defined, should be 'name'
+
+greet('Alice')
+```
+
+CORRECT
+```python
+def greet(name):
+    print('Hello,', name)  # Use the parameter name
+
+greet('Alice')
+```
+
+3) Not passing enough arguments when function expects them
+
+WRONG
+```python
+def add(a, b, c):
+    return a + b + c
+
+result = add(1, 2)  # Missing third argument
+```
+
+CORRECT
+```python
+def add(a, b, c):
+    return a + b + c
+
+result = add(1, 2, 3)  # All 3 arguments provided
+print(result)  # 6
+```
+
+Short tips:
+- Match the number of arguments to the number of parameters.
+- Use parameter names correctly inside the function.
+- Use function names + parentheses to call: `func(args)`.
 
 ## Related Concepts
 - [[Python - Functions - Return Values]]

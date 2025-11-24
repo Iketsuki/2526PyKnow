@@ -80,9 +80,59 @@ if score % 5 == 0:
 - Analyze: Compare `**` vs repeated `*`.
 - Create: Build calculations using multiple operators.
 
-## Common Errors
-- Division by zero: `10 / 0` crashes.
-- Integer division rounds down: `7 // 2` is `3`, not `3.5`.
+## Common Errors with Example Code
+
+1) Division by zero (ZeroDivisionError)
+
+WRONG
+```python
+result = 10 / 0  # ZeroDivisionError: division by zero
+```
+
+CORRECT
+```python
+divisor = 0
+if divisor != 0:
+    result = 10 / divisor
+else:
+    result = None
+```
+
+2) Confusing `/` (decimal) with `//` (floor division)
+
+WRONG
+```python
+cookies = 7
+kids = 2
+per_kid = cookies / kids
+print(per_kid)  # 3.5 (but you wanted whole cookies)
+```
+
+CORRECT
+```python
+cookies = 7
+kids = 2
+per_kid = cookies // kids   # 3 (whole cookies)
+leftover = cookies % kids   # 1 (leftover)
+```
+
+3) Misunderstanding modulo (remainder, not division)
+
+WRONG
+```python
+result = 10 % 3  # expecting 3 remainder 1
+# but forgetting % gives only the remainder
+print(result)  # 1 (just remainder)
+```
+
+CORRECT
+```python
+dividend = 10
+divisor = 3
+quotient = dividend // divisor  # 3
+remainder = dividend % divisor  # 1
+print(f'{dividend} ÷ {divisor} = {quotient} R {remainder}')
+```
 
 ## Related Concepts
 - [[Python - Math - Operator Precedence]]

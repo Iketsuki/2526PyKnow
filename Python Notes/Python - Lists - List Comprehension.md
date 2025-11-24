@@ -190,10 +190,55 @@ print(squares)  # {0, 1, 4, 9, 16}
 - Analyze: Compare readability: loop vs comprehension.
 - Create: Build comprehension with nested loop.
 
-## Common Errors
-- Wrong syntax: `[for x in range(5) x**2]` (expression first).
-- Overcomplicating: if too complex, use loop instead.
-- Nested confusion: `[x for row in matrix for x in row]` order matters.
+## Common Errors with Example Code
+
+1) Wrong syntax (expression and loop order)
+
+WRONG
+```python
+# INVALID syntax
+bad = [for x in range(5) x**2]
+```
+
+CORRECT
+```python
+good = [x**2 for x in range(5)]
+```
+
+2) Overcomplicating a comprehension (hard to read)
+
+WRONG
+```python
+# Hard to understand, avoid if too long
+result = [f(x) for x in items if cond1(x) and cond2(x) and other_check(x)]
+```
+
+CORRECT
+```python
+result = []
+for x in items:
+    if cond1(x) and cond2(x) and other_check(x):
+        result.append(f(x))
+```
+
+3) Nested comprehension ordering mistakes
+
+WRONG
+```python
+matrix = [[1,2],[3,4]]
+flat = [row for x in matrix for x in row]  # Wrong order
+```
+
+CORRECT
+```python
+matrix = [[1,2],[3,4]]
+flat = [x for row in matrix for x in row]  # Correct order
+```
+
+Short tips:
+- Keep comprehensions simple and readable.
+- If it needs comments or multiple lines, prefer a loop.
+- Order of `for` clauses matters in nested comprehensions.
 
 ## Related Concepts
 - [[Python - Lists - Common Patterns]]

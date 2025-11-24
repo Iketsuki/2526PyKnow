@@ -213,11 +213,62 @@ print(unique)  # [1, 2, 3, 4]
 - Analyze: Compare `sort()` vs `sorted()`.
 - Create: Build a student rank tracker (add, sort, remove).
 
-## Common Errors
-- `append()` returns None: `x = list.append(5)` makes `x = None`.
-- `insert()` doesn't return value: use it for side effect only.
-- `sort()` modifies list: doesn't create new list.
-- `remove()` only first occurrence: loop to remove all.
+## Common Errors with Example Code
+
+1) Thinking list methods return the modified list (they often return None)
+
+WRONG
+```python
+mylist = [1, 2]
+new = mylist.append(3)
+print(new)  # None — not the new list
+```
+
+CORRECT
+```python
+mylist = [1, 2]
+mylist.append(3)
+print(mylist)  # [1, 2, 3]
+```
+
+2) Using `append()` instead of `extend()` when adding multiple items
+
+WRONG
+```python
+lst = [1, 2]
+lst.append([3, 4])
+print(lst)  # [1, 2, [3, 4]]  (nested list)
+```
+
+CORRECT
+```python
+lst = [1, 2]
+lst.extend([3, 4])
+print(lst)  # [1, 2, 3, 4]
+```
+
+3) Removing while iterating (skips items)
+
+WRONG
+```python
+items = [1, 2, 3, 4]
+for x in items:
+    if x % 2 == 0:
+        items.remove(x)
+print(items)  # Unexpected result
+```
+
+CORRECT
+```python
+items = [1, 2, 3, 4]
+result = [x for x in items if x % 2 != 0]
+print(result)  # [1, 3]
+```
+
+Short tips:
+- Most mutating list methods return None — they change the list in-place.
+- Use `extend()` to add multiple items, `append()` to add one item.
+- Avoid modifying a list while iterating; iterate over a copy or use a comprehension.
 
 ## Related Concepts
 - [[Python - Lists - Common Patterns]]

@@ -112,15 +112,68 @@ print(type(y).__name__)  # 'list'
 - Create: Build input validator that checks types.
 
 ## Common Errors
-- Confusing `type()` with `type(x) = int` (can't assign type).
-- Forgetting that `type()` returns class, not string.
-- `isinstance()` preferred over `type() ==` for flexibility.
+
+## Related Concepts
+- [[Python - Debugging - Common Error Types]]
+
+## Common Errors with Example Code
+
+1) Confusing `type()` usage vs assignment
+
+WRONG
+```python
+type(x) = int  # SyntaxError: can't assign to function call
+```
+
+CORRECT
+```python
+if type(x) is int:
+    print('x is int')
+```
+
+2) Comparing types with `type()` instead of using `isinstance()` (less flexible)
+
+WRONG
+```python
+if type(value) == int:
+    handle_int(value)
+```
+
+CORRECT
+```python
+if isinstance(value, int):
+    handle_int(value)
+
+# isinstance works with subclasses and tuples of types too:
+if isinstance(value, (int, float)):
+    handle_number(value)
+```
+
+3) Forgetting that `input()` returns strings and requires conversion
+
+WRONG
+```python
+val = input('Number: ')
+if type(val) == int:
+    print('Got an int')
+# This will never be True because input() returns str
+```
+
+CORRECT
+```python
+val = input('Number: ')
+try:
+    num = int(val)
+    print('Got an int')
+except ValueError:
+    print('Not an int')
+```
 
 ## Related Concepts
 - [[Python - Variables - Types Basics]]
 - [[Python - IO - Input Types (Strings vs Numbers vs Lists)]]
 - [[Python - Conditionals - Truthiness]]
-- [[Python - Debugging - Common Error Types]]
 
 ## MOC
+- Parent: [[Python - Variables & Types (MOC)]]
 - Parent: [[Python - Variables & Types (MOC)]]

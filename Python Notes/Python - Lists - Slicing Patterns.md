@@ -132,10 +132,56 @@ print(items[10:20])     # [] (empty list, not an error!)
 - Analyze: Compare `list[::2]` vs `list[1::2]`.
 - Create: Extract alternating items (checkerboard pattern).
 
-## Common Errors
-- Forgetting stop is exclusive: `list[0:3]` is items 0, 1, 2 (not 3).
-- Negative step confusion: `list[8:2:-1]` goes 8→3 (not 8→2).
-- Empty slice is valid: `list[10:20]` returns `[]`, not error.
+## Common Errors with Example Code
+
+1) Forgetting stop is exclusive (not inclusive)
+
+WRONG
+```python
+numbers = [0, 1, 2, 3, 4, 5]
+print(numbers[1:3])  # Expecting [1, 2, 3] but got [1, 2]
+# Stop index 3 is excluded!
+```
+
+CORRECT
+```python
+numbers = [0, 1, 2, 3, 4, 5]
+print(numbers[1:4])  # [1, 2, 3] (includes 1, 2, 3)
+# Remember: start:stop includes start but excludes stop
+```
+
+2) Negative step confusion (direction not obvious)
+
+WRONG
+```python
+numbers = [0, 1, 2, 3, 4, 5]
+result = numbers[4:2:-1]  # Expecting [4, 3, 2] but got [4, 3]
+# Stop at 2 is still exclusive!
+```
+
+CORRECT
+```python
+numbers = [0, 1, 2, 3, 4, 5]
+result = numbers[4:0:-1]  # [4, 3, 2, 1] (stops before 0)
+result2 = numbers[::-1]   # [5, 4, 3, 2, 1, 0] (full reverse)
+```
+
+3) Assuming slicing can error (it can't)
+
+WRONG
+```python
+items = ['a', 'b', 'c']
+# Student expects this to error
+result = items[10:20]  # But it doesn't error!
+```
+
+CORRECT
+```python
+items = ['a', 'b', 'c']
+result = items[10:20]  # Returns [] (empty list, safe)
+# Slicing is always safe, even out of bounds
+# (unlike indexing which raises IndexError)
+```
 
 ## Related Concepts
 - [[Python - Lists - Indexing & Edge Cases]]

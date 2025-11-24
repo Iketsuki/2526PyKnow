@@ -228,10 +228,81 @@ for i in range(1000):
 - Analyze: Trace 3×3 nested loop execution.
 - Create: Build checkerboard pattern (alternating X and O).
 
-## Common Errors
-- Off-by-one in both loops: leads to wrong grid size.
-- Forgetting inner loop runs completely: 3×4 = 12 iterations total.
-- Breaking outer from inner: only breaks inner (use flag to break both).
+## Common Errors with Example Code
+
+1) Forgetting the inner loop runs completely (wrong iteration count)
+
+WRONG
+```python
+# How many times does print run?
+for i in range(3):
+    for j in range(3):
+        print('*')
+# If you answer 3, you're wrong!
+# Actually 9 (3 × 3)
+```
+
+CORRECT
+```python
+# Total iterations = outer × inner
+count = 0
+for i in range(3):  # 3 times
+    for j in range(3):  # 3 times each
+        count += 1
+print(f'Total iterations: {count}')  # 9
+```
+
+2) Breaking outer loop from inner (only breaks inner)
+
+WRONG
+```python
+found = False
+for i in range(5):
+    for j in range(5):
+        if i == 2 and j == 2:
+            break  # Only breaks inner loop, not outer!
+print('Done')
+# Still prints all 5 outer iterations
+```
+
+CORRECT
+```python
+found = False
+for i in range(5):
+    for j in range(5):
+        if i == 2 and j == 2:
+            found = True
+            break  # Breaks inner
+    if found:
+        break  # Breaks outer
+print('Done')
+```
+
+3) Off-by-one in nested loops (wrong grid size)
+
+WRONG
+```python
+for i in range(3):
+    for j in range(3):
+        print('*', end=' ')
+    print()
+# Prints 3×3, but maybe you wanted 4×4
+```
+
+CORRECT
+```python
+rows = 4
+cols = 4
+for i in range(rows):
+    for j in range(cols):
+        print('*', end=' ')
+    print()
+```
+
+Short tips:
+- Nested loops: total iterations = outer loops × inner loops.
+- Use a flag to break out of multiple loops.
+- Be careful with range() boundaries in both loops.
 
 ## Related Concepts
 - [[Python - Loops - For vs While]]

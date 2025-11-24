@@ -44,8 +44,37 @@ if __name__ == '__main__':
 ## Use Case / Actionability
 When to use this; concrete steps and checklist.
 
-## Common Errors / Things to Remember
-- Bullet list of gotchas and pitfalls.
+## Common Errors with Example Code
+
+1) First common mistake → Clear description of why it happens
+
+WRONG
+# Example showing the incorrect way
+result = something_wrong()
+
+CORRECT
+# Example showing the correct way
+result = something_correct()
+
+2) Second common mistake → Consequence or error message
+
+WRONG
+# Buggy code here
+bad_code = approach()
+
+CORRECT
+# Fixed version
+good_code = approach_correctly()
+
+3) Third common mistake → When and why this matters
+
+WRONG
+# Easy-to-miss error
+quick_mistake()
+
+CORRECT
+# Best practice approach
+best_approach()
 
 ## Related Concepts
 - Link back to MOC: [[Python Fundamentals (MOC)]]

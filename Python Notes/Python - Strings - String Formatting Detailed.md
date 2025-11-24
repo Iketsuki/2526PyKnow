@@ -160,10 +160,50 @@ print(message)  # Python is awesome
 - Analyze: Compare f-string vs .format().
 - Create: Build report with aligned columns.
 
-## Common Errors
-- Forgetting `f` before string: `'Hello {x}'` won't work (need `f'...'`).
-- Wrong format specifier: `{x:.2}` should be `{x:.2f}`.
-- Nested quotes: Use different quotes `f"{x's}"` or escape.
+## Common Errors with Example Code
+
+1) Forgetting the `f` prefix
+
+WRONG
+```python
+name = 'Bob'
+print('Hello {name}')  # prints literal {name}
+```
+
+CORRECT
+```python
+name = 'Bob'
+print(f'Hello {name}')  # Hello Bob
+```
+
+2) Wrong or incomplete format specifier for numbers
+
+WRONG
+```python
+value = 3.14159
+print(f'Value: {value:.2}')  # incorrect, may be unexpected
+```
+
+CORRECT
+```python
+value = 3.14159
+print(f'Value: {value:.2f}')  # Value: 3.14
+```
+
+3) Quotes inside formatted expressions
+
+WRONG
+```python
+user = "O'Neil"
+print(f"User: {user's}")  # SyntaxError
+```
+
+CORRECT
+```python
+user = "O'Neil"
+print(f"User: {user}'s")
+print(f'User: {user}\'s')  # escape single quote in single-quoted f-string
+```
 
 ## Related Concepts
 - [[Python - Strings - Basics]]

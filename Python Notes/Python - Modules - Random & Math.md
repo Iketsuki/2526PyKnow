@@ -217,10 +217,55 @@ print(random.randint(1, 100))  # Again 82
 - Analyze: Compare `random.randint()` vs `random.choice()`.
 - Create: Build random quiz generator.
 
-## Common Errors
-- Forgetting `import`: must do before using.
-- Math functions use radians, not degrees.
-- `random.shuffle()` modifies list, doesn't return new one.
+## Common Errors with Example Code
+
+1) Forgetting to import module → Functions not available without import
+
+WRONG
+num = random.randint(1, 6)  # NameError: name 'random' is not defined
+
+CORRECT
+import random
+num = random.randint(1, 6)
+print(num)  # e.g., 4
+
+2) Math functions use radians, not degrees → `.sin(90)` doesn't mean 90 degrees
+
+WRONG
+import math
+result = math.sin(90)
+print(result)  # 0.893... (not 1!)
+# 90 is in radians, not degrees
+
+CORRECT
+import math
+# Convert degrees to radians first:
+angle_deg = 90
+angle_rad = math.radians(angle_deg)
+result = math.sin(angle_rad)
+print(result)  # 1.0 (correct!)
+
+3) `random.shuffle()` modifies in place, doesn't return new list → Must use the original
+
+WRONG
+import random
+items = ['a', 'b', 'c']
+shuffled = random.shuffle(items)  # Returns None!
+print(shuffled)  # None (not shuffled list)
+
+CORRECT
+import random
+items = ['a', 'b', 'c']
+random.shuffle(items)  # Modifies items in place
+print(items)  # ['b', 'a', 'c'] (or other order)
+
+# For a new shuffled copy:
+import random
+original = ['a', 'b', 'c']
+shuffled = original.copy()
+random.shuffle(shuffled)
+print(original)  # ['a', 'b', 'c'] (unchanged)
+print(shuffled)  # ['c', 'a', 'b'] (or other order)
 
 ## Related Concepts
 - [[Python - Variables & Types - Type Conversion]]

@@ -29,8 +29,55 @@ empty = []
 - Analyze: How many items does `[]` have?
 - Create: Build a program that initializes lists for different data categories.
 
-## Common Errors
-- Using parentheses instead of brackets.
+## Common Errors with Example Code
+
+1) Using parentheses `()` instead of brackets `[]` (creates tuple)
+
+WRONG
+```python
+items = (1, 2, 3)  # tuple, not list
+items.append(4)  # AttributeError: 'tuple' object has no attribute 'append'
+```
+
+CORRECT
+```python
+items = [1, 2, 3]
+items.append(4)
+print(items)  # [1, 2, 3, 4]
+```
+
+2) Expecting list methods on immutable types (tuples)
+
+WRONG
+```python
+t = (1, 2, 3)
+t[0] = 10  # TypeError: 'tuple' object does not support item assignment
+```
+
+CORRECT
+```python
+t = (1, 2, 3)
+lst = list(t)  # convert to list
+lst[0] = 10
+print(lst)
+```
+
+3) Creating a list with a single value incorrectly
+
+WRONG
+```python
+single = [None] * 3  # If mutable default, further pitfalls when used as default arg
+```
+
+CORRECT
+```python
+single = [None, None, None]
+```
+
+Short tips:
+- Use `[]` to create lists, `()` for tuples.
+- Convert tuples to lists if you need mutability: `list(t)`.
+- Be explicit when creating multiple copies of mutable items (use list comprehensions for independent copies).
 
 ## Related Concepts
 - [[Python - Lists - Indexing & Access]]

@@ -184,10 +184,52 @@ print(age)
 - Analyze: Compare `int()` vs `float()` conversions.
 - Create: Build calculator with input conversion & error handling.
 
-## Common Errors
-- `int('3.14')` crashes (must use `float()` first).
-- Forgetting input() returns string (always convert).
-- Not handling ValueError when conversion fails.
+## Common Errors with Example Code
+
+1) Using `int()` on a float-string like '3.14' (ValueError)
+
+WRONG
+```python
+num = int('3.14')  # ValueError: invalid literal for int() with base 10
+```
+
+CORRECT
+```python
+num = float('3.14')  # 3.14
+num_int = int(num)   # 3 (explicit conversion from float)
+```
+
+2) Not handling invalid input when converting
+
+WRONG
+```python
+val = input('Enter number: ')
+num = int(val)  # crashes if user types 'abc'
+```
+
+CORRECT
+```python
+val = input('Enter number: ')
+try:
+    num = int(val)
+except ValueError:
+    print('Please enter a valid integer')
+    num = 0
+```
+
+3) Assuming conversions change values in-place or behave like casting in other languages
+
+WRONG
+```python
+price = '9.99'
+price.int()  # AttributeError: 'str' object has no attribute 'int'
+```
+
+CORRECT
+```python
+price = '9.99'
+price = float(price)  # assign converted value back to variable
+```
 
 ## Related Concepts
 - [[Python - Variables & Types - Type Checking]]

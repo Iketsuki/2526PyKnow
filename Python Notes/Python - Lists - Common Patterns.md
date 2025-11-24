@@ -213,10 +213,64 @@ print(capitalized)  # ['ALICE', 'BOB', 'CHARLIE']
 - Analyze: Compare `remove()` vs `pop()`.
 - Create: Build a todo list (add, remove, check off).
 
-## Common Errors
-- Modifying list while looping: can skip items.
-- `append()` returns None: `list = list.append(x)` makes `list = None`.
-- Forgetting to check if item exists before removing.
+## Common Errors with Example Code
+
+1) Modifying a list while looping (skips items)
+
+WRONG
+```python
+items = [1, 2, 3, 4, 5]
+for item in items:
+    if item % 2 == 0:
+        items.remove(item)  # Changes list during iteration
+print(items)  # [1, 3, 5] but missed some!
+```
+
+CORRECT
+```python
+items = [1, 2, 3, 4, 5]
+items_to_remove = [item for item in items if item % 2 == 0]
+for item in items_to_remove:
+    items.remove(item)
+print(items)  # [1, 3, 5]
+
+# OR: Create new list instead
+items = [1, 2, 3, 4, 5]
+odds = [item for item in items if item % 2 == 1]
+```
+
+2) Thinking `append()` returns the list (it returns None)
+
+WRONG
+```python
+my_list = []
+my_list = my_list.append(1)  # append() returns None
+print(my_list)  # None
+```
+
+CORRECT
+```python
+my_list = []
+my_list.append(1)  # Don't assign append() result
+print(my_list)  # [1]
+```
+
+3) Forgetting to check if item exists before removing
+
+WRONG
+```python
+items = [1, 2, 3]
+items.remove(5)  # ValueError: list.remove(x): x not in list
+```
+
+CORRECT
+```python
+items = [1, 2, 3]
+if 5 in items:
+    items.remove(5)
+else:
+    print('Item not found')
+```
 
 ## Related Concepts
 - [[Python - Loops - For Loop Basics]]

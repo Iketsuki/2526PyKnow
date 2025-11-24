@@ -53,10 +53,52 @@ print(even_squares)
 - Use comprehensions for short, clear transformations or filtering tasks.
 - Prefer loops if you need multiple statements or side effects.
 
-## Common Errors / Things to Remember
-- Avoid heavy side effects inside comprehensions (e.g., file I/O or complex state mutations).
-- For deeply nested comprehensions, consider intermediate variables for clarity.
-- Generator expressions use `()` and are memory-efficient for large streams.
+## Common Errors with Example Code
+
+1) Heavy side effects inside comprehension → Can cause unexpected None values (use loops instead)
+
+WRONG
+# Trying to modify state inside comprehension (confusing):
+results = []
+values = [x for x in range(5) if results.append(x) is None]
+# This works but is unreadable and bad practice
+
+CORRECT
+# Use a loop for operations with side effects:
+results = []
+for x in range(5):
+    results.append(x)
+
+2) Deeply nested comprehensions → Hard to read (break into steps)
+
+WRONG
+# Complex nested comprehension:
+matrix = [[j for j in range(3)] for i in range(3)]
+# Hard to understand at a glance
+
+CORRECT
+# Make it clearer with intermediate variables:
+row = [j for j in range(3)]
+matrix = [row for i in range(3)]
+
+# Or explicit loop:
+matrix = []
+for i in range(3):
+    matrix.append([j for j in range(3)])
+
+3) Confusing generator expressions `()` with list comprehensions `[]` → Different behavior
+
+WRONG
+numbers = (x**2 for x in range(100))  # Generator
+print(numbers[0])  # TypeError: 'generator' is not subscriptable
+
+CORRECT
+numbers = [x**2 for x in range(100)]  # List
+print(numbers[0])  # 0 (direct access works)
+
+# Use generators for memory efficiency with large data
+generator = (x**2 for x in range(1000000))  # Doesn't compute all upfront
+first_value = next(generator)  # 0
 
 ## Related Concepts
 - [[Python - Generators]]  <!-- intentionally linked even if note doesn't exist yet -->

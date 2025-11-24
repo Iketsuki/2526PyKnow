@@ -32,8 +32,68 @@ else:
 - Analyze: Simplify nested if-else chains.
 - Create: Build a decision tree program.
 
-## Common Errors
-- Using `=` instead of `==` in conditions.
+## Common Errors with Example Code
+
+1) Using `=` instead of `==` in conditions (assignment vs comparison)
+
+WRONG
+```python
+age = 15
+if age = 18:  # SyntaxError: invalid syntax
+    print('Adult')
+```
+
+CORRECT
+```python
+age = 15
+if age == 18:  # Use == for comparison
+    print('Adult')
+else:
+    print('Not 18')
+```
+
+2) Forgetting colon at the end of if/elif/else (SyntaxError)
+
+WRONG
+```python
+age = 15
+if age > 18
+    print('Adult')
+```
+
+CORRECT
+```python
+age = 15
+if age > 18:
+    print('Adult')
+elif age < 13:
+    print('Child')
+else:
+    print('Teenager')
+```
+
+3) Indentation errors (wrong scope)
+
+WRONG
+```python
+age = 15
+if age > 18:
+print('Adult')  # Not indented!
+```
+
+CORRECT
+```python
+age = 15
+if age > 18:
+    print('Adult')  # Indented properly
+else:
+    print('Teenager')
+```
+
+Short tips:
+- Use `==` for comparison, `=` for assignment.
+- Always end if/elif/else with a colon.
+- Indent the code block after the colon (usually 4 spaces).
 
 ## Related Concepts
 - [[Python - Conditionals - Boolean Logic (and-or-not)]]

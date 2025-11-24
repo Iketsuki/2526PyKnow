@@ -174,10 +174,59 @@ print(check_password('safe123'))  # True
 - Analyze: Trace function with multiple returns.
 - Create: Build score calculator with custom formula.
 
-## Common Errors
-- Forgetting parentheses on call: `greet` vs `greet()`.
-- Not returning value: function returns None by default.
-- Confusing parameters: order matters: `f(a, b)` vs `f(b, a)`.
+## Common Errors with Example Code
+
+1) Forgetting parentheses when calling → Accesses function object, doesn't run it
+
+WRONG
+def greet(name):
+    return f'Hello, {name}!'
+
+result = greet  # Forgot () - this is the function itself!
+print(result)  # <function greet at 0x...> (not "Hello"!)
+
+CORRECT
+def greet(name):
+    return f'Hello, {name}!'
+
+result = greet('Alice')  # () calls the function
+print(result)  # Hello, Alice!
+
+2) Not returning a value → Function returns None by default
+
+WRONG
+def add(a, b):
+    total = a + b
+    # Forgot return statement!
+
+result = add(5, 3)
+print(result)  # None (oops!)
+
+CORRECT
+def add(a, b):
+    total = a + b
+    return total
+
+result = add(5, 3)
+print(result)  # 8
+
+3) Confusing order of parameters → Parameters must match call order
+
+WRONG
+def create_profile(name, age):
+    return f'{name} is {age}'
+
+# Wrong order - parameters switched!
+profile = create_profile(25, 'Bob')
+print(profile)  # 25 is Bob (nonsense!)
+
+CORRECT
+def create_profile(name, age):
+    return f'{name} is {age}'
+
+# Correct order matches definition
+profile = create_profile('Bob', 25)
+print(profile)  # Bob is 25
 
 ## Related Concepts
 - [[Python - Functions - Default Parameters & Keywords]]

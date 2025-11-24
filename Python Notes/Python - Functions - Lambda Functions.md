@@ -174,10 +174,50 @@ print(by_second)  # [(3, 1), (1, 2), (2, 2)]
 - Analyze: Compare lambda with list comprehension.
 - Create: Build custom sort (e.g., by score descending).
 
-## Common Errors
-- Lambda with multiple statements: can't do `lambda x: x*2; print(x)`.
-- Forgetting `list()` with map/filter (returns iterator in Python 3).
-- Using lambda when def is clearer (always prefer readability).
+## Common Errors with Example Code
+
+1) Lambda with multiple statements → Can't do multi-line inside lambda (use `def` instead)
+
+WRONG
+# Trying to put 2+ statements in lambda:
+# f = lambda x: x*2; print(x)  # SyntaxError!
+
+CORRECT
+def double_and_print(x):
+    result = x * 2
+    print(result)
+    return result
+
+double_and_print(5)  # 10
+
+2) Forgetting `list()` with map/filter → Returns iterator, not list in Python 3
+
+WRONG
+numbers = [1, 2, 3, 4, 5]
+squared = map(lambda x: x**2, numbers)
+print(squared)  # <map object at 0x...> (not a list!)
+print(squared[0])  # TypeError: 'map' object is not subscriptable
+
+CORRECT
+numbers = [1, 2, 3, 4, 5]
+squared = list(map(lambda x: x**2, numbers))
+print(squared)  # [1, 4, 9, 16, 25] (actual list)
+print(squared[0])  # 1
+
+3) Using lambda when `def` is clearer → Reduces readability for complex logic
+
+WRONG
+# Confusing lambda with conditionals:
+result = list(map(lambda x: x**2 if x % 2 == 0 else x*3, numbers))
+
+CORRECT
+def custom_transform(x):
+    if x % 2 == 0:
+        return x ** 2
+    else:
+        return x * 3
+
+result = list(map(custom_transform, numbers))  # Much clearer!
 
 ## Related Concepts
 - [[Python - Functions - Parameters & Return Values]]

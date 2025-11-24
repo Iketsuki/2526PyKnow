@@ -181,10 +181,54 @@ def function(a, b, *args, **kwargs):
 - Analyze: Compare *args unpacking vs list passing.
 - Create: Build flexible API function with *args and **kwargs.
 
-## Common Errors
-- Wrong order: \*\*kwargs must come after \*args.
-- Forgetting asterisks: `args` is different from `*args`.
-- Not unpacking when calling: `add([1, 2])` vs `add(*[1, 2])`.
+## Common Errors with Example Code
+
+1) Wrong parameter order → `**kwargs` must come AFTER `*args`
+
+WRONG
+# This order is wrong:
+# def function(a, **kwargs, *args):  # SyntaxError!
+
+CORRECT
+# Correct order: regular, then *args, then **kwargs
+def function(a, *args, **kwargs):
+    print(a, args, kwargs)
+
+function(1, 2, 3, x=10, y=20)
+# 1 (2, 3) {'x': 10, 'y': 20}
+
+2) Forgetting asterisks when defining → `args` is different from `*args`
+
+WRONG
+def sum_all(args):  # Missing * - this is just a regular parameter!
+    return sum(args)
+
+# Must pass a list, can't do: sum_all(1, 2, 3)
+result = sum_all([1, 2, 3])  # 6
+
+CORRECT
+def sum_all(*args):  # * makes it variable arguments
+    return sum(args)
+
+result = sum_all(1, 2, 3)  # 6 (much cleaner!)
+
+3) Not unpacking when calling → `*` unpacks list/tuple as arguments
+
+WRONG
+def add(a, b, c):
+    return a + b + c
+
+numbers = [1, 2, 3]
+# Without unpacking - TypeError!
+# result = add(numbers)  # TypeError: add() missing 2 required arguments
+
+CORRECT
+def add(a, b, c):
+    return a + b + c
+
+numbers = [1, 2, 3]
+result = add(*numbers)  # * unpacks the list
+print(result)  # 6
 
 ## Related Concepts
 - [[Python - Functions - Parameters & Return Values]]

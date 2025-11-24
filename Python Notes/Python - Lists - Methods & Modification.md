@@ -30,9 +30,59 @@ last = items.pop()        # Returns 4, list is [0, 1, 3]
 - Analyze: What happens if you remove a non-existent item?
 - Create: Build a to-do list program with add/remove/display.
 
-## Common Errors
-- `append()` returns None, not the modified list.
-- Removing during iteration can skip items.
+## Common Errors with Example Code
+
+1) Thinking `append()` returns the list (it returns None)
+
+WRONG
+```python
+my_list = [1, 2, 3]
+my_list = my_list.append(4)  # append() returns None!
+print(my_list)  # None (lost the list!)
+```
+
+CORRECT
+```python
+my_list = [1, 2, 3]
+my_list.append(4)  # Don't assign the return value
+print(my_list)  # [1, 2, 3, 4]
+```
+
+2) Removing an item that doesn't exist (ValueError)
+
+WRONG
+```python
+items = [1, 2, 3]
+items.remove(5)  # ValueError: list.remove(x): x not in list
+```
+
+CORRECT
+```python
+items = [1, 2, 3]
+if 5 in items:
+    items.remove(5)
+else:
+    print('Item not found')
+```
+
+3) Modifying list during iteration (skips items)
+
+WRONG
+```python
+items = [1, 2, 3, 4, 5]
+for item in items:
+    if item % 2 == 0:
+        items.remove(item)  # Modifying while looping
+# Result: some items are skipped!
+```
+
+CORRECT
+```python
+items = [1, 2, 3, 4, 5]
+# Create new list instead of modifying during loop
+items = [item for item in items if item % 2 != 0]
+print(items)  # [1, 3, 5]
+```
 
 ## Related Concepts
 - [[Python - Lists - Iteration & Looping]]

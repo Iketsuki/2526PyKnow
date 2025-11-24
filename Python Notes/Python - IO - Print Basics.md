@@ -34,9 +34,56 @@ print('A', 'B', 'C', sep='-')
 - Analyze: What's the difference between `print(1, 2)` and `print('1' + '2')`?
 - Create: Write a function that prints a formatted greeting with multiple values.
 
-## Common Errors
-- Confusing `print()` with string concatenation.
-- Forgetting that `print()` always adds a newline at the end.
+## Common Errors with Example Code
+
+1) Confusing `print()` with string concatenation (silent bugs)
+
+WRONG
+```python
+print('Age: ' + 25)  # TypeError: can only concatenate str (not "int") to str
+```
+
+CORRECT
+```python
+print('Age:', 25)  # Separate with comma
+# OR
+print(f'Age: {25}')  # Use f-string
+```
+
+2) Not understanding the difference between `sep` and `+` (formatting)
+
+WRONG
+```python
+print('A' + 'B' + 'C')  # 'ABC' (concatenated, no space)
+```
+
+CORRECT
+```python
+print('A', 'B', 'C')  # A B C (space-separated by default)
+print('A', 'B', 'C', sep='-')  # A-B-C (custom separator)
+```
+
+3) Forgetting that `print()` adds newline by default (layout issues)
+
+WRONG
+```python
+print('Loading', end='')
+# Some code
+print('Done')
+# Prints on separate lines (forgot newline)
+```
+
+CORRECT
+```python
+print('Loading', end='')  # No newline
+print('.', end='')  # Appends to same line
+print('Done')  # Now on new line
+```
+
+Short tips:
+- Use comma to separate values, not `+`.
+- Use `sep=` to change the separator between values.
+- Use `end=` to change the line ending (default is `\n`).
 
 ## Related Concepts
 - [[Python - IO - Output Formatting]]

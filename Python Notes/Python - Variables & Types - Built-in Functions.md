@@ -268,10 +268,53 @@ round(x, decimals)  # Round number
 - Analyze: Compare safety of `int()` vs type checking.
 - Create: Build input function using built-ins to validate data.
 
-## Common Errors
-- Forgetting `len()` returns count, not last index.
-- `type()` vs `isinstance()` — use `isinstance()` when possible.
-- `int('3.14')` crashes — convert float first.
+## Common Errors with Example Code
+
+1) Confusing `len()` result with last index (off-by-one)
+
+WRONG
+```python
+items = [1, 2, 3]
+last = items[len(items)]  # IndexError: list index out of range
+```
+
+CORRECT
+```python
+items = [1, 2, 3]
+last = items[len(items) - 1]  # or items[-1]
+print(last)  # 3
+```
+
+2) Using `type()` equality instead of `isinstance()` (less flexible)
+
+WRONG
+```python
+if type(x) == int:
+    handle_int(x)
+```
+
+CORRECT
+```python
+if isinstance(x, int):
+    handle_int(x)
+```
+
+3) Calling functions like `min()` on empty sequences raises errors
+
+WRONG
+```python
+nums = []
+print(min(nums))  # ValueError: min() arg is an empty sequence
+```
+
+CORRECT
+```python
+nums = []
+if nums:
+    print(min(nums))
+else:
+    print('No items to compare')
+```
 
 ## Related Concepts
 - [[Python - Variables & Types - Type Checking]]

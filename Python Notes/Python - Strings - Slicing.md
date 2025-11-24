@@ -239,10 +239,56 @@ string[start:stop:step]  # with custom step
 - Analyze: Compare `text[::-1]` vs `reversed(text)`.
 - Create: Build string parser that extracts email domain.
 
-## Common Errors
-- Off-by-one: `text[0:3]` is indices 0,1,2 (not including 3).
-- Forgetting slicing is safe: Won't error for `text[0:1000]`.
-- Confusing `text[-1]` (last char) with `text[:-1]` (all but last).
+## Common Errors with Example Code
+
+1) Off-by-one when choosing the stop index
+
+WRONG
+```python
+text = 'abcdef'
+print(text[0:3])  # 'abc' -> beginner may expect 0..3 inclusive
+```
+
+CORRECT
+```python
+text = 'abcdef'
+# stop index is exclusive: [start:stop] includes start..stop-1
+print(text[0:3])  # 'abc' (indices 0,1,2)
+print(text[0:len(text)])  # full string if needed
+```
+
+2) Assuming slicing raises errors for out-of-range indices
+
+WRONG
+```python
+text = 'hi'
+print(text[0:100])  # some expect IndexError
+```
+
+CORRECT
+```python
+text = 'hi'
+print(text[0:100])  # 'hi' - slicing is safe and truncated, unlike indexing
+try:
+    print(text[100])
+except IndexError:
+    print('IndexError when indexing out of range')
+```
+
+3) Mixing up `text[-1]` vs `text[:-1]`
+
+WRONG
+```python
+text = 'hello'
+print(text[:-1])  # 'hell' but sometimes expected last char
+```
+
+CORRECT
+```python
+text = 'hello'
+print(text[-1])   # 'o' -> last character
+print(text[:-1])  # 'hell' -> all except last
+```
 
 ## Related Concepts
 - [[Python - Strings - Basics]]

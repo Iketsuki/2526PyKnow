@@ -30,8 +30,66 @@ greet()
 - Analyze: When should code be in a function?
 - Create: Build a program with multiple functions.
 
-## Common Errors
-- Forgetting to call the function (defining ≠ running).
+## Common Errors with Example Code
+
+1) Defining a function but never calling it (code doesn't run)
+
+WRONG
+```python
+def greet():
+    print('Hello!')
+# Function defined, but never called
+```
+
+CORRECT
+```python
+def greet():
+    print('Hello!')
+
+greet()  # Actually call the function
+```
+
+2) Forgetting parentheses when calling (referencing, not executing)
+
+WRONG
+```python
+def greet():
+    print('Hello!')
+
+greet  # Just refers to function, doesn't call it
+```
+
+CORRECT
+```python
+def greet():
+    print('Hello!')
+
+greet()  # Parentheses execute the function
+```
+
+3) Defining a function with no body (SyntaxError)
+
+WRONG
+```python
+def greet():
+    # Empty, needs at least one statement
+```
+
+CORRECT
+```python
+def greet():
+    print('Hello!')
+
+# OR use pass as placeholder:
+def placeholder():
+    pass
+```
+
+Short tips:
+- Use `def name():` to define a function.
+- Use `name()` with parentheses to call it.
+- A function does nothing until called.
+- Use `pass` if you need an empty function body.
 
 ## Related Concepts
 - [[Python - Functions - Parameters & Arguments]]

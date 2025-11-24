@@ -33,8 +33,52 @@ print('Hello, ' + name + '! Nice to meet you.')
 - Try running the program often after small changes.
 - If input looks empty, check you pressed Enter.
 
-## Common Errors
-- Forgetting to convert input to numbers when needed (use `int()` or `float()`).
+## Common Errors with Example Code
+
+1) Forgetting to convert input to numbers → Input is always a string, can't do math on it
+
+WRONG
+age = input('How old are you? ')
+next_year = age + 1  # TypeError: can only concatenate str (not "int") to str
+print(f'Next year you'll be {next_year}')
+
+CORRECT
+age = input('How old are you? ')
+age = int(age)  # Convert string to integer
+next_year = age + 1
+print(f'Next year you'll be {next_year}')
+
+2) Input stays as a string when you add it → Concatenates instead of adding numbers
+
+WRONG
+num1 = input('First number: ')  # User types "5"
+num2 = input('Second number: ')  # User types "3"
+total = num1 + num2
+print(f'Total: {total}')  # Prints "53" not 8!
+
+CORRECT
+num1 = int(input('First number: '))  # Convert immediately
+num2 = int(input('Second number: '))
+total = num1 + num2
+print(f'Total: {total}')  # Prints "8"
+
+3) Forgetting to press Enter after input prompt → Program waits indefinitely
+
+WRONG
+# If user forgets to press Enter, program hangs:
+name = input('Enter your name: ')
+# Program waits for user to press Enter
+
+CORRECT
+# Always remind user what to do:
+name = input('Enter your name and press Enter: ')
+print(f'Hello, {name}!')
+
+# Or handle empty input:
+name = input('Enter your name: ')
+if name == '':
+    name = 'Friend'
+print(f'Hello, {name}!')
 
 ## Related Concepts
 - [[Python - Variables & Types - Basic Variables (Day 2)]]

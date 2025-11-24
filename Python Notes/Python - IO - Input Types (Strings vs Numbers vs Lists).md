@@ -57,9 +57,60 @@ print(is_yes)  # True or False
 - Analyze: What's the difference between `int('5')` and `'5'`?
 - Create: Read multiple inputs and process them.
 
-## Common Errors
-- Forgetting to convert before math: `int(input()) + 5` works; `input() + 5` fails.
-- Not handling `.split()` correctly for multiple values.
+## Common Errors with Example Code
+
+1) Forgetting to convert input before using in math (TypeError)
+
+WRONG
+```python
+age = input('Age: ')
+print(age + 10)  # TypeError: can only concatenate str (not "int") to str
+```
+
+CORRECT
+```python
+age = int(input('Age: '))
+print(age + 10)
+```
+
+2) Not handling unpacking errors with `.split()` (ValueError)
+
+WRONG
+```python
+# User enters: "Alice 25"
+name, age, city = input('Name age city: ').split()  # ValueError if missing value
+```
+
+CORRECT
+```python
+parts = input('Name age city (3 values): ').split()
+if len(parts) == 3:
+    name, age, city = parts
+    print(f'{name}, {age}, {city}')
+else:
+    print('Please enter exactly 3 values')
+```
+
+3) Not handling invalid type conversion (ValueError)
+
+WRONG
+```python
+numbers = list(map(int, input('Numbers: ').split()))  # Crashes if user types 'a 2 3'
+```
+
+CORRECT
+```python
+try:
+    numbers = list(map(int, input('Numbers: ').split()))
+    print(f'Sum: {sum(numbers)}')
+except ValueError:
+    print('Please enter numbers only, separated by spaces')
+```
+
+Short tips:
+- Always convert input to the type you need (int, float, etc).
+- Use try-except for type conversion.
+- Validate the number of values from `.split()`.
 
 ## Related Concepts
 - [[Python - Variables - Type Casting]]

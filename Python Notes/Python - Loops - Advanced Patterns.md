@@ -261,11 +261,64 @@ else:
 - Analyze: Compare `break` with `loop-else`.
 - Create: Build searcher that finds duplicates.
 
-## Common Errors
-- Forgetting `enumerate()` returns (index, value) tuple.
-- Using `break` in nested loop → Only exits inner loop.
-- `loop-else` confused with `if-else`.
-- `zip()` stops at shortest list → Need to handle carefully.
+## Common Errors with Example Code
+
+1) Forgetting `enumerate()` returns (index, value) tuple
+
+WRONG
+```python
+items = ['a', 'b', 'c']
+for i in enumerate(items):
+    print(i)  # (0, 'a'), (1, 'b'), (2, 'c') - tuples, not separate values
+```
+
+CORRECT
+```python
+items = ['a', 'b', 'c']
+for i, item in enumerate(items):  # Unpack the tuple
+    print(f'{i}: {item}')  # 0: a, 1: b, 2: c
+```
+
+2) Using `break` in nested loops (only exits inner loop)
+
+WRONG
+```python
+for i in range(3):
+    for j in range(3):
+        if j == 1:
+            break  # Only exits inner loop!
+    print(f'i={i}')  # Still prints for all i values
+```
+
+CORRECT
+```python
+# Need a flag or different structure to exit outer loop
+for i in range(3):
+    for j in range(3):
+        if j == 1:
+            break
+    if j == 1:  # Check if inner loop broke
+        break
+```
+
+3) Forgetting `zip()` stops at the shortest list
+
+WRONG
+```python
+names = ['Alice', 'Bob', 'Charlie']
+ages = [14, 15]  # Only 2 ages
+for name, age in zip(names, ages):
+    print(f'{name}: {age}')
+# Charlie is skipped (no age)!
+```
+
+CORRECT
+```python
+names = ['Alice', 'Bob', 'Charlie']
+ages = [14, 15, 16]  # Match the lengths
+for name, age in zip(names, ages):
+    print(f'{name}: {age}')  # All three printed
+```
 
 ## Related Concepts
 - [[Python - Loops - For vs While]]

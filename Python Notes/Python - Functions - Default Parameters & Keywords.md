@@ -204,10 +204,63 @@ print(add_item('b'))  # ['b'] — correct!
 - Analyze: Compare positional vs keyword calls.
 - Create: Build configuration function with many defaults.
 
-## Common Errors
-- Non-default after default: `def f(a=5, b):` is error.
-- Passing keyword as positional: `f(greeting='Hi', 'Alice')` is error.
-- Mutable defaults: lists/dicts in defaults are shared!
+## Common Errors with Example Code
+
+1) Placing a non-default parameter after a default (SyntaxError)
+
+WRONG
+```python
+def f(a=5, b):
+    return a + b  # SyntaxError: non-default argument follows default argument
+```
+
+CORRECT
+```python
+def f(a, b=5):
+    return a + b
+
+print(f(2))  # 7
+```
+
+2) Mutable default parameter shared across calls (unexpected state)
+
+WRONG
+```python
+def add_item_wrong(item, items=[]):
+    items.append(item)
+    return items
+
+print(add_item_wrong('a'))  # ['a']
+print(add_item_wrong('b'))  # ['a', 'b']  -> unexpected
+```
+
+CORRECT
+```python
+def add_item(item, items=None):
+    if items is None:
+        items = []
+    items.append(item)
+    return items
+
+print(add_item('a'))  # ['a']
+print(add_item('b'))  # ['b']
+```
+
+3) Mixing positional and keyword arguments incorrectly
+
+WRONG
+```python
+def greet(greeting, name):
+    return f'{greeting}, {name}'
+
+print(greet(greeting='Hi', 'Alice'))  # SyntaxError: positional argument follows keyword
+```
+
+CORRECT
+```python
+print(greet('Hi', 'Alice'))
+print(greet(greeting='Hi', name='Alice'))
+```
 
 ## Related Concepts
 - [[Python - Functions - Parameters & Return Values]]

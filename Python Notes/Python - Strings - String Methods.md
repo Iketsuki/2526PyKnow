@@ -183,10 +183,57 @@ print(text)  # hello python
 - Analyze: Compare `.replace()` vs `.find()`.
 - Create: Build text cleaner (strip, lowercase, replace).
 
-## Common Errors
-- Forgetting strings immutable: `text.lower()` doesn't change `text`.
-- Case-sensitive: `'Hello' != 'hello'`.
-- Off-by-one in find: returns index, not count.
+## Common Errors with Example Code
+
+1) Expecting string methods to modify in-place
+
+WRONG
+```python
+text = 'Hello'
+text.lower()
+print(text)  # still 'Hello' -> method returns new string
+```
+
+CORRECT
+```python
+text = 'Hello'
+text = text.lower()  # assign the returned string
+print(text)  # 'hello'
+```
+
+2) Using `.find()` without checking for -1
+
+WRONG
+```python
+text = 'hello'
+pos = text.find('x')
+print(text[pos:])  # will slice from -1 -> unexpected result
+```
+
+CORRECT
+```python
+text = 'hello'
+pos = text.find('x')
+if pos != -1:
+    print(text[pos:])
+else:
+    print('not found')
+# Or use 'in' to check membership first
+```
+
+3) Misusing `.split()`/`.join()` order
+
+WRONG
+```python
+words = 'a b c'
+joined = words.join(',')  # wrong: join expects iterable, called on separator
+```
+
+CORRECT
+```python
+words = 'a b c'.split()  # ['a','b','c']
+joined = ','.join(words)  # 'a,b,c'
+```
 
 ## Related Concepts
 - [[Python - Strings - Basics]]

@@ -128,10 +128,56 @@ else:
 - Analyze: Compare list vs set for membership check.
 - Create: Design data structure for friends (use best collection).
 
-## Common Errors
-- Trying to change tuple: `tuple[0] = 5` crashes.
-- Forgetting set removes dupes: `{1, 1, 1}` is `{1}`.
-- Sets are unordered: don't rely on index like lists.
+## Common Errors with Example Code
+
+1) Trying to modify a tuple (immutable, raises TypeError)
+
+WRONG
+```python
+point = (3, 4)
+point[0] = 5  # TypeError: 'tuple' object does not support item assignment
+```
+
+CORRECT
+```python
+point = (3, 4)
+# Tuples can't be changed; create a new tuple instead
+point = (5, 4)
+# Or convert to list, modify, convert back
+point_list = list(point)
+point_list[0] = 5
+point = tuple(point_list)
+```
+
+2) Forgetting sets remove duplicates automatically
+
+WRONG
+```python
+scores = {85, 90, 85, 95, 90}
+print(len(scores))  # Expected 5, but got 3
+# Duplicates removed automatically!
+```
+
+CORRECT
+```python
+scores = {85, 90, 85, 95, 90}
+print(scores)  # {85, 90, 95} - duplicates gone
+# Sets are for unique values only
+```
+
+3) Using list/tuple/set syntax incorrectly (single element tuples)
+
+WRONG
+```python
+single = (5)  # This is just an int, not a tuple!
+print(type(single))  # <class 'int'>
+```
+
+CORRECT
+```python
+single = (5,)  # Need trailing comma for single-element tuple
+print(type(single))  # <class 'tuple'>
+```
 
 ## Related Concepts
 - [[Python - Lists - Indexing & Access]]

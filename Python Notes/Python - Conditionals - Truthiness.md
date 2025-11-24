@@ -246,10 +246,71 @@ if not password:
 - Analyze: When is `0` valid but falsy?
 - Create: Build form validator using truthiness.
 
-## Common Errors
-- Using `if x:` when `x = 0` is valid (use `if x is not None:`).
-- Confusing truthiness with boolean equality.
-- Not understanding that empty containers are falsy.
+## Common Errors with Example Code
+
+1) Using truthiness when zero is a valid value (logic error)
+
+WRONG
+```python
+age = 0
+if age:
+    print('Age is set')
+else:
+    print('Age not set')  # Prints, but 0 is a valid age!
+```
+
+CORRECT
+```python
+age = 0
+if age is not None:  # Explicit check for None
+    print('Age is set')
+else:
+    print('Age not set')
+```
+
+2) Confusing truthiness with boolean equality
+
+WRONG
+```python
+items = [1, 2, 3]
+if items == True:  # Never true! List is not boolean
+    print('Has items')
+```
+
+CORRECT
+```python
+items = [1, 2, 3]
+if items:  # Use truthiness, not comparison
+    print('Has items')
+```
+
+3) Not understanding that empty containers are falsy
+
+WRONG
+```python
+scores = []
+if scores:
+    average = sum(scores) / len(scores)
+else:
+    print('No scores')
+# Might cause ZeroDivisionError if scores is somehow not empty
+```
+
+CORRECT
+```python
+scores = []
+if scores:  # Empty list is falsy, skips the if block
+    average = sum(scores) / len(scores)
+    print(f'Average: {average}')
+else:
+    print('No scores')
+```
+
+Short tips:
+- Falsy: False, 0, 0.0, '', [], {}, (), None
+- Truthy: everything else (True, non-zero numbers, non-empty containers)
+- Use explicit checks for None with `is None` / `is not None`
+- Avoid truthiness checks when 0 is a valid value.
 
 ## Related Concepts
 - [[Python - Conditionals - Boolean Logic (and-or-not)]]
@@ -257,5 +318,4 @@ if not password:
 - [[Python - Variables & Types - Type Checking]]
 
 ## MOC
-- Parent: [[Python - Conditionals (MOC)]]
 - Parent: [[Python - Conditionals (MOC)]]

@@ -36,8 +36,67 @@ print(f'With tax: ${final_cost:.2f}')
 - Analyze: How to round to 2 decimal places for currency?
 - Create: Build a calculator for multiple items with tax.
 
-## Common Errors
-- Integer division `5 // 2` gives `2` (not `2.5`).
+## Common Errors with Example Code
+
+1) Using `/` instead of `//` when you need whole numbers
+
+WRONG
+```python
+cookies = 7
+kids = 2
+per_kid = cookies / kids
+print(per_kid)  # 3.5
+# But you might want whole cookies: 3
+```
+
+CORRECT
+```python
+cookies = 7
+kids = 2
+per_kid = cookies // kids  # 3
+print(f'Each kid gets {per_kid} cookies')
+```
+
+2) Not handling division by zero in calculations
+
+WRONG
+```python
+total = 50
+num_people = 0
+per_person = total / num_people  # ZeroDivisionError
+```
+
+CORRECT
+```python
+total = 50
+num_people = 0
+if num_people > 0:
+    per_person = total / num_people
+    print(f'Per person: ${per_person:.2f}')
+else:
+    print('Need at least 1 person')
+```
+
+3) Forgetting to round money values
+
+WRONG
+```python
+item1 = 10.99
+item2 = 15.50
+item3 = 23.51
+total = item1 + item2 + item3
+print(total)  # May have floating-point error
+```
+
+CORRECT
+```python
+item1 = 10.99
+item2 = 15.50
+item3 = 23.51
+total = item1 + item2 + item3
+total = round(total, 2)
+print(f'Total: ${total:.2f}')
+```
 
 ## Related Concepts
 - [[Python - Variables - Types Basics]]

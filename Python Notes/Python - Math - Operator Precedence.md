@@ -92,10 +92,61 @@ Parentheses override everything.
 - Analyze: Compare `2 ** 3 * 4` vs `2 ** (3 * 4)`.
 - Create: Build a multi-step calculation (recipe, budget).
 
-## Common Errors
-- Forgetting parentheses for grouped operations.
-- Assuming left-to-right for all operators (exponents are right-to-left).
-- Division chains: `20 / 2 / 2` is `(20 / 2) / 2 = 5`, not `20 / (2 / 2) = 20`.
+## Common Errors with Example Code
+
+1) Forgetting parentheses for grouped operations (incorrect precedence)
+
+WRONG
+```python
+# Calculate average of three numbers
+result = 85 + 90 + 78 / 3
+print(result)  # 201 (divides only 78, not sum)
+```
+
+CORRECT
+```python
+# Parentheses ensure sum first, then divide
+result = (85 + 90 + 78) / 3
+print(result)  # 84.333...
+```
+
+2) Assuming exponents are left-to-right (they're right-to-left)
+
+WRONG
+```python
+result = 2 ** 3 ** 2
+# If left-to-right: (2 ** 3) ** 2 = 8 ** 2 = 64
+# But Python does: 2 ** (3 ** 2) = 2 ** 9 = 512
+```
+
+CORRECT
+```python
+result = 2 ** (3 ** 2)  # Explicit: 2 ** 9 = 512
+print(result)  # 512
+
+# Use parentheses to control evaluation order
+result2 = (2 ** 3) ** 2  # 8 ** 2 = 64
+print(result2)  # 64
+```
+
+3) Division chains are left-to-right (not intuitive)
+
+WRONG
+```python
+result = 20 / 2 / 2
+# This is: (20 / 2) / 2 = 10 / 2 = 5
+# (not 20 / (2 / 2) = 20)
+```
+
+CORRECT
+```python
+# Be explicit for clarity
+result = (20 / 2) / 2  # 5
+print(result)
+
+result2 = 20 / (2 / 2)  # 20 (different!)
+print(result2)
+```
 
 ## Related Concepts
 - [[Python - Math - Arithmetic Operators]]
