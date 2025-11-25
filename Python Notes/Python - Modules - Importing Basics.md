@@ -13,191 +13,170 @@ learning_objectives:
 
 # Python - Modules - Importing Basics
 
-## Concept
-Import modules using:
-- **`import module`** — Use as `module.function()`
-- **`from module import function`** — Use as `function()`
-- **`from module import name as alias`** — Rename for clarity
-- **`from module import *`** — Import all (generally avoid)
+## What is a Module?
 
-## Basic Import (import module)
+A **module** is code that someone else wrote to help you. It's like a toolbox with tools inside.
+
+Python comes with many built-in modules:
+- `math` — for math functions
+- `random` — for random numbers
+- `datetime` — for dates and times
+
+## Importing a Module
+
+Use `import` to load a module:
+
+```python
+import math
+print(math.sqrt(9))  # 3.0
+```
+
+When you import a module, you use the name followed by a dot:
+```
+math.sqrt()  ← module.function()
+```
+
+## Method 1: Import the Whole Module
 
 ```python
 import math
 
-# Access functions with module.function()
 print(math.sqrt(16))  # 4.0
-print(math.pi)  # 3.14159...
-print(math.ceil(3.2))  # 4
-
-# You have access to everything in the module
-print(dir(math))  # Lists all available functions/constants
+print(math.pi)       # 3.14159...
+print(math.ceil(3.2)) # 4
 ```
 
-## From Import (from module import function)
+Use `module.function()` for everything.
 
+## Method 2: Import One Function
+
+```python
+from math import sqrt
+
+print(sqrt(16))  # 4.0
+# No module name needed!
+```
+
+Use the function name directly.
+
+## Real-World Examples
+
+**Using Random Numbers**
+```python
+import random
+
+number = random.randint(1, 10)
+print(number)
+```
+
+**Using Time**
+```python
+import datetime
+
+today = datetime.datetime.now()
+print(today)
+```
+
+**Using Multiple Functions**
 ```python
 from math import sqrt, pi
 
-# Use function directly without module prefix
-print(sqrt(16))  # 4.0
-print(pi)  # 3.14159...
-
-# Only imported items are available
-# print(math.ceil(3.2))  # Error: math not imported
-print(ceil(3.2))  # Error: ceil not imported (not explicitly imported)
+print(sqrt(25))  # 5.0
+print(pi)       # 3.14159...
 ```
 
-## Aliasing (as)
+## Which Method to Use?
 
+**Use `import module` if:**
+- You use many functions from the module
+- You want to be clear which module each function comes from
+
+**Use `from module import function` if:**
+- You use only one or two functions
+- You use them many times and want shorter code
+
+## Exercise Examples
+
+**Remember:**
 ```python
-# Rename to shorter name
-import numpy as np
-array = np.array([1, 2, 3])
-
-# Rename specific function
-from datetime import datetime as dt
-today = dt.now()
-
-# Useful for avoiding name conflicts
-from PIL import Image as PILImage
-from matplotlib import Image as MatplotlibImage
-
-# Can use either without confusion
-```
-
-## Relative Imports (Modules within Modules)
-
-```python
-# Standard library: nested modules
-import os.path  # path is a module within os
-
-# Your code:
-# myproject/
-#   utils.py
-#   helpers/
-#     __init__.py
-#     formatter.py
-
-# In myproject/helpers/formatter.py:
-from ..utils import process  # Go up one level, then to utils
-
-# Or absolute import:
-from myproject.utils import process
-```
-
-## Real Examples
-
-```python
-# Example 1: Using datetime module
-from datetime import datetime, timedelta
-
-today = datetime.now()
-tomorrow = today + timedelta(days=1)
-print(f'Today: {today}')
-print(f'Tomorrow: {tomorrow}')
-
-# Example 2: Using multiple modules
-import random
 import math
-from statistics import mean
-
-numbers = [random.randint(1, 10) for _ in range(5)]
-average = mean(numbers)
-rounded = math.ceil(average)
-print(f'Numbers: {numbers}, Average: {average}, Rounded: {rounded}')
-
-# Example 3: Avoid name conflicts
-from math import sqrt as math_sqrt
-from numpy import sqrt as np_sqrt
-
-# Can use both
-val1 = math_sqrt(4)  # Uses math version
-val2 = np_sqrt([4, 9, 16])  # Uses numpy version
-
-# Example 4: Import specific items you need
-from string import ascii_letters, digits, punctuation
-
-print(f'Letters: {ascii_letters}')
-print(f'Digits: {digits}')
-
-# Example 5: Conditional imports
-try:
-    import numpy as np
-    HAS_NUMPY = True
-except ImportError:
-    HAS_NUMPY = False
-    np = None
-
-if HAS_NUMPY:
-    array = np.array([1, 2, 3])
-else:
-    array = [1, 2, 3]  # Use list instead
 ```
 
-## Import Styles Comparison
-
-| Style | Syntax | Usage | Best For |
-|-------|--------|-------|----------|
-| Module | `import math` | `math.sqrt()` | General use |
-| Specific | `from math import sqrt` | `sqrt()` | Frequently used items |
-| Alias | `import numpy as np` | `np.array()` | Long module names |
-| Multiple | `from math import sqrt, pi` | `sqrt()`, `pi` | Multiple items from module |
-
-## Standard Import Organization
-
+**Understand:**
+What's the difference?
 ```python
-# Order: Standard library, third-party, local modules
-import sys
-import os
-from datetime import datetime
-
-import numpy as np
-import pandas as pd
-
-from myproject.utils import helper
-from myproject.config import settings
+import math
+print(math.sqrt(9))
+```
+vs
+```python
+from math import sqrt
+print(sqrt(9))
 ```
 
-## Exercises by Bloom Level
-
-- **Remember**: Write `import` and `from...import` statements.
-- **Understand**: Difference between import styles?
-- **Apply**: Import modules and use their functions.
-- **Analyze**: When to use each style for clarity?
-- **Create**: Organize imports and create your own modules.
+**Apply:**
+```python
+import random
+number = random.randint(1, 100)
+print(number)
+```
 
 ## Common Errors with Example Code
 
-### Error 1: Using function name when module not imported
+1) Forgetting the module name prefix
+
+WRONG
 ```python
-# WRONG: Function used but not imported
-from math import sqrt
-# But then trying to use:
-result = math.sqrt(16)  # NameError: name 'math' is not defined
-
-# CORRECT: Use the imported name
-result = sqrt(16)
-
-# OR: Import the module
 import math
-result = math.sqrt(16)
+print(sqrt(16))  # Error!
 ```
 
-### Error 2: Forgetting module name prefix
+CORRECT
 ```python
-# WRONG: Using function without importing it directly
 import math
-
-result = sqrt(16)  # NameError: name 'sqrt' is not defined
-
-# CORRECT: Use module prefix or from-import
-result = math.sqrt(16)
-
-# OR:
-from math import sqrt
-result = sqrt(16)
+print(math.sqrt(16))  # With math.
 ```
+
+2) Using `import` but trying to use the short name
+
+WRONG
+```python
+from math import sqrt
+print(math.sqrt(16))  # Error! math not imported
+```
+
+CORRECT
+```python
+from math import sqrt
+print(sqrt(16))  # Without math.
+```
+
+3) Trying to use a function that isn't imported
+
+WRONG
+```python
+from math import sqrt
+print(math.ceil(3.2))  # Error! ceil not imported
+```
+
+CORRECT
+```python
+from math import sqrt, ceil
+print(ceil(3.2))  # Now it's imported
+```
+
+## Tips
+- Use **`import module`** for whole modules
+- Use **`from module import function`** for specific functions
+- Always use the **correct name** when calling
+- Check the **module name** first!
+
+## Related Concepts
+- [[Python - Modules - Module Overview]]
+- [[Python - Functions - Definition Basics]]
+
+## MOC
+- Parent: [[Python - Modules (MOC)]]
 
 ### Error 3: Name conflicts without aliasing
 ```python

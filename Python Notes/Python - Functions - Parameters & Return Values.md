@@ -11,227 +11,197 @@ learning_objectives:
 
 # Python - Functions - Parameters & Return Values
 
-## Concept
-**Functions** take input (**parameters**) and return output (**return value**). Structure: `def name(params): ... return result`.
+## What are Parameters?
 
-## Basic Function
+**Parameters** are inputs to a function. Think of them like slots in a box.
 
 ```python
-# Define function
-def greet(name):
-    message = f'Hello, {name}!'
-    return message
+def greet(name):  # 'name' is a parameter
+    print(f'Hello, {name}!')
 
-# Call function
-result = greet('Alice')
-print(result)  # Hello, Alice!
+greet('Alice')  # 'Alice' is the argument
 ```
 
-## Function with Multiple Parameters
+Parameters are in the definition. Arguments are what you pass when calling.
+
+## Using One Parameter
+
+```python
+def say_name(name):
+    print(name)
+
+say_name('Alice')  # Output: Alice
+say_name('Bob')    # Output: Bob
+```
+
+## Using Multiple Parameters
+
+```python
+def add(a, b):
+    print(a + b)
+
+add(5, 3)  # Output: 8
+add(10, 20)  # Output: 30
+```
+
+## What is Return?
+
+**Return** gives back a value from the function.
 
 ```python
 def add(a, b):
     total = a + b
-    return total
+    return total  # Send back the answer
 
 result = add(5, 3)
 print(result)  # 8
 ```
 
-## Function with No Parameters
+Without `return`, you get `None`.
 
-```python
-def get_password():
-    return 'super_secret'
+## Real Examples
 
-password = get_password()
-print(password)
-```
-
-## Function with No Return Value
-
-```python
-def print_welcome():
-    print('Welcome!')
-    # No return statement
-
-print_welcome()  # Prints: Welcome!
-# Returns None if you don't explicitly return
-```
-
-## Real-World: Grade Checker
-
+**Grade Checker**
 ```python
 def check_grade(score):
     if score >= 90:
         return 'A'
     elif score >= 80:
         return 'B'
-    elif score >= 70:
-        return 'C'
     else:
-        return 'F'
+        return 'C'
 
-print(check_grade(85))  # B
-print(check_grade(92))  # A
-print(check_grade(65))  # F
+grade = check_grade(85)
+print(grade)  # B
 ```
 
-## Real-World: Discount Calculator
-
+**Discount Calculator**
 ```python
-def apply_discount(price, discount_percent):
-    discount_amount = price * (discount_percent / 100)
-    final_price = price - discount_amount
-    return final_price
+def apply_discount(price, discount):
+    final = price - discount
+    return final
 
-original = 50
-discounted = apply_discount(original, 20)  # 20% off
-print(f'${discounted:.2f}')  # $40.00
+new_price = apply_discount(50, 10)
+print(new_price)  # 40
 ```
 
-## Return Multiple Values (As Tuple)
+**Double a Number**
+```python
+def double(number):
+    return number * 2
+
+result = double(5)
+print(result)  # 10
+```
+
+## Default Parameters
+
+You can give parameters a default value:
 
 ```python
-def divide_with_remainder(dividend, divisor):
+def greet(name, greeting='Hello'):
+    return f'{greeting}, {name}!'
+
+print(greet('Alice'))  # Hello, Alice!
+print(greet('Bob', 'Hi'))  # Hi, Bob!
+```
+
+## Returning Multiple Values
+
+```python
+def divide(dividend, divisor):
     quotient = dividend // divisor
     remainder = dividend % divisor
-    return quotient, remainder  # Return tuple
+    return quotient, remainder
 
-q, r = divide_with_remainder(17, 5)
-print(f'{q} remainder {r}')  # 3 remainder 2
-```
-
-## Optional Parameters (Defaults)
-
-```python
-# Parameter with default value
-def greet_with_title(name, title='Friend'):
-    return f'Hello, {title} {name}!'
-
-print(greet_with_title('Alice'))  # Hello, Friend Alice!
-print(greet_with_title('Bob', 'Dr.'))  # Hello, Dr. Bob!
-```
-
-## Parameters vs Arguments
-
-```python
-# Parameters (in definition)
-def add(a, b):  # 'a' and 'b' are parameters
-    return a + b
-
-# Arguments (in call)
-result = add(5, 3)  # 5 and 3 are arguments
-```
-
-## Scope: Local vs Global
-
-```python
-x = 10  # Global variable
-
-def modify():
-    x = 20  # Local variable (inside function)
-    return x
-
-print(modify())  # 20 (inside function)
-print(x)  # 10 (outside function, unchanged)
-```
-
-## Real-World: Input Validator
-
-```python
-def is_valid_age(age):
-    if age < 0:
-        return False
-    if age > 120:
-        return False
-    return True
-
-print(is_valid_age(15))  # True
-print(is_valid_age(-5))  # False
-```
-
-## Early Return (Exit Function)
-
-```python
-def check_password(password):
-    if len(password) < 8:
-        return False  # Return early
-    
-    if password == 'password':
-        return False  # Return early
-    
-    return True  # Only reaches here if above passes
-
-print(check_password('abc'))  # False
-print(check_password('safe123'))  # True
+q, r = divide(17, 5)
+print(q)  # 3
+print(r)  # 2
 ```
 
 ## Exercises by Bloom Level
-- Remember: What does `return` do?
-- Understand: Difference between parameter and argument?
-- Apply: Write function to convert temperature.
-- Analyze: Trace function with multiple returns.
-- Create: Build score calculator with custom formula.
+
+- **Remember:** What is a parameter?
+- **Understand:** What does `return` do?
+- **Apply:** Write a function that adds two numbers and returns the result.
+- **Create:** Write a function that checks if a number is positive.
 
 ## Common Errors with Example Code
 
-1) Forgetting parentheses when calling → Accesses function object, doesn't run it
+1) Forgetting `return`
 
 WRONG
-def greet(name):
-    return f'Hello, {name}!'
-
-result = greet  # Forgot () - this is the function itself!
-print(result)  # <function greet at 0x...> (not "Hello"!)
-
-CORRECT
-def greet(name):
-    return f'Hello, {name}!'
-
-result = greet('Alice')  # () calls the function
-print(result)  # Hello, Alice!
-
-2) Not returning a value → Function returns None by default
-
-WRONG
+```python
 def add(a, b):
     total = a + b
-    # Forgot return statement!
+    # No return!
 
 result = add(5, 3)
-print(result)  # None (oops!)
+print(result)  # None
+```
 
 CORRECT
+```python
 def add(a, b):
     total = a + b
     return total
 
 result = add(5, 3)
 print(result)  # 8
+```
 
-3) Confusing order of parameters → Parameters must match call order
+2) Wrong parameter order
 
 WRONG
+```python
 def create_profile(name, age):
     return f'{name} is {age}'
 
-# Wrong order - parameters switched!
-profile = create_profile(25, 'Bob')
-print(profile)  # 25 is Bob (nonsense!)
+profile = create_profile(25, 'Bob')  # Wrong order!
+print(profile)  # 25 is Bob (wrong!)
+```
 
 CORRECT
+```python
 def create_profile(name, age):
     return f'{name} is {age}'
 
-# Correct order matches definition
-profile = create_profile('Bob', 25)
+profile = create_profile('Bob', 25)  # Correct order
 print(profile)  # Bob is 25
+```
+
+3) Forgetting parentheses when calling
+
+WRONG
+```python
+def greet(name):
+    return f'Hello, {name}!'
+
+result = greet  # No ()!
+print(result)  # Shows function, not message
+```
+
+CORRECT
+```python
+def greet(name):
+    return f'Hello, {name}!'
+
+result = greet('Alice')  # With ()
+print(result)  # Hello, Alice!
+```
+
+## Tips
+- **Parameters** go in the definition
+- **Arguments** go in the call
+- **Return** sends back a value
+- Parameters can have **default values**
 
 ## Related Concepts
-- [[Python - Functions - Default Parameters & Keywords]]
-- [[Python - Functions - Lambda Functions]]
+- [[Python - Functions - Definition Basics]]
 - [[Python - Conditionals - If-Else Basics]]
+
+## MOC
+- Parent: [[Python - Functions (MOC)]]
 
 ## MOC
 - Parent: [[Python - Functions (MOC)]]

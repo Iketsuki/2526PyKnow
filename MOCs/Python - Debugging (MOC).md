@@ -18,7 +18,10 @@ Deep-dive into debugging: error types, reading tracebacks, strategies, and testi
 - [[Python - Debugging - Debugging Strategies]]
 
 ### Exception Handling
-- [[Python - Debugging - Try-Except Basics]]
+- [[Python - Debugging - Try-Except Basics]] — Parent index for exception handling
+  - [[Python - Debugging - Try-Except Syntax]] — try, except, else, multiple exceptions
+  - [[Python - Debugging - Exception Info]] — Accessing error messages, types, tracebacks
+  - [[Python - Debugging - Finally Blocks]] — Cleanup, resource management, context managers
 - [[Python - Debugging - Exception Handling]] — Full try-except, multiple exceptions, raising errors
 
 ---

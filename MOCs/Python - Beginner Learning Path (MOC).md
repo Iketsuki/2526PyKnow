@@ -8,22 +8,22 @@ moc: true
 This MOC orders starter concepts using Bloom's Taxonomy (Remember → Create). Use this as a guided path for beginners; each item should link to an atomic note.
 
 ## Remember (facts & syntax)
-- [[Python - Data Structures - Lists]]
-- [[Python - Data Structures - Dictionaries]]
-- [[Python - Control Flow - If Statements]]
-- [[Python - Control Flow - For Loops]]
+- [[Python - Lists - Creation & Initialization]]
+- [[Python - Dicts - Creation & Initialization]]
+- [[Python - Conditionals - If-Else Basics]]
+- [[Python - Loops - For vs While]]
 
 ## Understand (explain & paraphrase)
 - [[Python - Control Flow - List Comprehensions]]
-- [[Python - Functions - Definitions]]
-- [[Python - Modules - Importing]]
+- [[Python - Functions - Definition Basics]]
+- [[Python - Modules - Importing Basics]]
 
 ## Apply (use in simple tasks)
-- [[Python - Functions - Arguments and Return Values]]
-- [[Python - File I/O - Reading and Writing]]
+- [[Python - Functions - Parameters & Return Values]]
+- [[Python - File I/O - Read & Write (Day 9)]]
 
 ## Analyze (compare approaches)
-- [[Python - Error Handling - Exceptions]]
+- [[Python - Debugging - Exception Handling]]
 - [[Python - Data Structures - When to use lists vs dicts]]
 
 ## Evaluate (choose best approach)

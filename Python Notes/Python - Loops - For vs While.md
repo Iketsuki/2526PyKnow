@@ -11,114 +11,142 @@ learning_objectives:
 
 # Python - Loops - For vs While
 
-## Concept
-**For loops** — iterate over a known sequence (list, range, string). **While loops** — repeat while condition is true (unknown count).
+## What is a Loop?
 
-## For Loops (Known Count)
+A **loop** repeats code multiple times. Instead of writing the same code 5 times, write it once and loop it 5 times.
+
+## For Loops - When You Know the Count
+
+Use **for** when you know how many times to repeat.
 
 ```python
-# Loop through range
+# Repeat 5 times
 for i in range(5):
-    print(i)  # 0, 1, 2, 3, 4
+    print(i)
+# Output: 0, 1, 2, 3, 4
 
-# Loop through list
+# Loop through a list
 fruits = ['apple', 'banana', 'cherry']
 for fruit in fruits:
     print(fruit)
+# Output: apple, banana, cherry
 
-# Loop through string
+# Loop through a word
 word = 'hello'
 for letter in word:
-    print(letter)  # h, e, l, l, o
+    print(letter)
+# Output: h, e, l, l, o
 ```
 
-## While Loops (Unknown Count)
+## While Loops - When You Don't Know the Count
+
+Use **while** when you repeat until something happens.
 
 ```python
-# Repeat until condition is false
-count = 0
-while count < 5:
+# Keep asking until user says no
+answer = 'yes'
+while answer == 'yes':
+    print('Playing...')
+    answer = input('Play again? (yes/no): ')
+
+# Countdown from 5
+count = 5
+while count > 0:
     print(count)
-    count += 1  # Increment
-
-# Loop until user quits
-while True:
-    answer = input('Continue? (yes/no): ')
-    if answer == 'no':
-        break  # Exit loop
+    count = count - 1
+print('Blastoff!')
 ```
 
-## Real-World: When to Use Each
+## For vs While - Which One?
 
-**For — Known Iterations:**
+**Use FOR if:**
+- You have a list
+- You know exactly how many times
+- You're going through each item
+
+**Use WHILE if:**
+- You don't know when to stop
+- You repeat until something happens
+- You're waiting for user input
+
+## Real-World: For Loop Examples
+
+**Greet 5 Friends**
 ```python
-# Greet 5 friends (known count)
 for i in range(5):
     print(f'Hello friend {i+1}')
+```
 
-# Process quiz scores (known list)
+Output:
+```
+Hello friend 1
+Hello friend 2
+Hello friend 3
+Hello friend 4
+Hello friend 5
+```
+
+**Check Homework Scores**
+```python
 scores = [85, 90, 78, 88]
 for score in scores:
     if score >= 80:
-        print(f'{score} — Pass!')
+        print(f'{score} - Good!')
 ```
 
-**While — Unknown Iterations:**
+## Real-World: While Loop Examples
+
+**Get Valid Number**
 ```python
-# Get valid input (unknown how many tries)
 while True:
-    num = input('Enter number 1-10: ')
-    try:
-        num = int(num)
-        if 1 <= num <= 10:
-            print(f'You chose {num}')
-            break
-    except:
+    num = input('Enter 1-10: ')
+    if num.isdigit() and 1 <= int(num) <= 10:
+        print(f'You chose {num}')
+        break  # Exit the loop
+    else:
         print('Invalid! Try again')
-
-# Countdown (known but might skip)
-time = 10
-while time > 0:
-    print(time)
-    time -= 1
-    if time == 5:
-        print('Halfway!')
 ```
 
-## Comparison
-
-| Feature | For | While |
-|---------|-----|-------|
-| Use When | Known sequence | Condition-based |
-| Count | Pre-determined | Unknown |
-| Best For | Lists, ranges | User input, validation |
-| Common Error | Off-by-one | Infinite loop |
-
-## Real-World Game Loop
-
+**Game Loop**
 ```python
-# Game with while (unknown when user quits)
 score = 0
-playing = True
+playing = 'yes'
 
-while playing:
-    action = input('Play again? (yes/no): ')
-    if action == 'no':
-        playing = False
-    else:
-        score += 10
-        print(f'Score: {score}')
+while playing == 'yes':
+    score = score + 10
+    print(f'Score: {score}')
+    playing = input('Play again? (yes/no): ')
 
 print(f'Final score: {score}')
 ```
 
-## Real-World: Process Multiple Items
+## Comparison
 
+| For Loop | While Loop |
+|----------|-----------|
+| Use with lists | Use with conditions |
+| Know the count | Don't know the count |
+| `for item in list:` | `while condition:` |
+| Good for processing items | Good for user input |
+
+## Real-World Comparison
+
+**FOR - Print Each Name (known list)**
 ```python
-# For loop (known list)
-tasks = ['homework', 'dishes', 'laundry']
+names = ['Alice', 'Bob', 'Charlie']
+for name in names:
+    print(name)
+```
 
-for task in tasks:
+**WHILE - Keep Asking Until Exit (unknown count)**
+```python
+while True:
+    name = input('What is your name? ')
+    print(f'Hello {name}!')
+    again = input('Play again? (yes/no): ')
+    if again != 'yes':
+        break
+```
     print(f'Doing {task}...')
     print(f'Finished {task}!')
 

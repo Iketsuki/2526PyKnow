@@ -16,7 +16,10 @@ Deep-dive into lists: creation, access, modification, and iteration.
 
 ### Operations & Patterns
 - [[Python - Lists - List Methods]]
-- [[Python - Lists - Methods & Operations]] — .append(), .insert(), .remove(), .pop(), .sort(), .copy()
+- [[Python - Lists - Methods & Operations]] — Parent index for method operations
+  - [[Python - Lists - Add Methods]] — .append(), .insert(), .extend()
+  - [[Python - Lists - Remove Methods]] — .remove(), .pop(), .clear()
+  - [[Python - Lists - Search & Sort]] — .index(), .count(), .sort(), .reverse(), sorted()
 - [[Python - Lists - Common Patterns]]
 - [[Python - Lists - List Comprehension]]
 

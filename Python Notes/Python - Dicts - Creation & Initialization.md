@@ -12,142 +12,158 @@ learning_objectives:
 
 # Python - Dicts - Creation & Initialization
 
-## Concept
-**Dictionaries** store key-value pairs using the syntax `{key: value}`. Keys must be unique, values can be anything.
+## What is a Dict?
 
-## Basic Creation
+A **dict** is a container that stores things by name, not by position.
+
+Think of a real dictionary:
+- A word (key) → its meaning (value)
+- A name (key) → a phone number (value)
+
+```python
+scores = {'Alice': 90, 'Bob': 85}
+person = {'name': 'Alice', 'age': 25}
+```
+
+## How to Create a Dict
+
+Use curly braces `{}` with `key: value` pairs:
 
 ```python
 # Empty dict
 empty = {}
 
-# Dict with initial values
+# Dict with data
 scores = {'Alice': 90, 'Bob': 85, 'Charlie': 78}
 
-# Dict with various value types
+# Dict with different types
 person = {
     'name': 'Alice',
     'age': 25,
-    'scores': [90, 85, 88],
     'active': True
 }
 ```
 
-## Different Creation Methods
+## Dict Examples
 
+**Scores by Name**
 ```python
-# Method 1: Literal syntax (most common)
-user = {'name': 'Bob', 'email': 'bob@example.com'}
-
-# Method 2: dict() constructor
-user = dict(name='Bob', email='bob@example.com')
-
-# Method 3: From list of tuples
-pairs = [('name', 'Bob'), ('email', 'bob@example.com')]
-user = dict(pairs)
-
-# Method 4: Using .fromkeys() (all same value)
-keys = ['a', 'b', 'c']
-empty_dict = dict.fromkeys(keys, 0)  # {'a': 0, 'b': 0, 'c': 0}
+grades = {'Alice': 'A', 'Bob': 'B', 'Charlie': 'C'}
 ```
 
-## Real Examples
-
+**Contact Information**
 ```python
-# Example 1: Student grades
-grades = {'Alice': 'A', 'Bob': 'B', 'Charlie': 'C'}
-print(grades['Alice'])  # 'A'
-
-# Example 2: Contact information
-contact = {
+person = {
     'name': 'Alice',
     'phone': '555-1234',
     'email': 'alice@example.com'
 }
+```
 
-# Example 3: Nested dict (dict within dict)
-students = {
-    'alice': {'age': 20, 'major': 'CS'},
-    'bob': {'age': 21, 'major': 'Math'}
-}
-
-# Example 4: Counting occurrences
+**Word Counts**
+```python
 word_count = {'python': 3, 'java': 2, 'ruby': 1}
+```
+
+**Birthday List**
+```python
+birthdays = {
+    'Alice': 'Jan 15',
+    'Bob': 'Mar 20',
+    'Charlie': 'Oct 5'
+}
+```
+
+## How to Use a Dict
+
+Access values by their key:
+
+```python
+person = {'name': 'Alice', 'age': 25}
+print(person['name'])  # Alice
+print(person['age'])   # 25
+
+grades = {'Alice': 90, 'Bob': 85}
+print(grades['Alice'])  # 90
 ```
 
 ## Exercises by Bloom Level
 
-- **Remember**: Create a simple dict. Create empty dict.
-- **Understand**: What are keys vs values? What types can keys be?
-- **Apply**: Create a dict with mixed types. Add initial values.
-- **Analyze**: Why use dicts vs lists?
-- **Create**: Build data structures with dicts (phonebook, inventory, etc.).
+- **Remember:** Create a simple dict with 2 items.
+- **Understand:** What is a key? What is a value?
+- **Apply:** Create a dict about yourself (name, age, etc).
+- **Create:** Build a phone number dictionary.
 
 ## Common Errors with Example Code
 
-### Error 1: Using mutable types as keys
-```python
-# WRONG: Lists can't be dictionary keys (mutable)
-scores = {['Alice', 'Bob']: [90, 85]}  # TypeError: unhashable type
+1) Using `=` instead of `:` between key and value
 
-# CORRECT: Use immutable types for keys (strings, numbers, tuples)
-scores = {('Alice', 'Bob'): [90, 85]}  # Tuple as key (immutable)
-scores = {'Alice': 90, 'Bob': 85}  # String keys (most common)
+WRONG
+```python
+person = {'name' = 'Alice'}  # Error!
 ```
 
-### Error 2: Forgetting colons between key and value
+CORRECT
 ```python
-# WRONG: Using = instead of :
-student = {'name' = 'Alice', 'age' = 25}  # SyntaxError!
-
-# CORRECT: Use colons in dict literal
-student = {'name': 'Alice', 'age': 25}
+person = {'name': 'Alice'}
 ```
 
-### Error 3: Forgetting commas between pairs
-```python
-# WRONG: Missing comma
-person = {'name': 'Alice' 'age': 25}  # SyntaxError!
+2) Forgetting commas between pairs
 
-# CORRECT: Commas separate pairs
+WRONG
+```python
+person = {'name': 'Alice' 'age': 25}  # Error!
+```
+
+CORRECT
+```python
 person = {'name': 'Alice', 'age': 25}
 ```
 
-### Error 4: Using quotes inconsistently
+3) Forgetting quotes around string keys and values
+
+WRONG
 ```python
-# WORKS: All string keys and values
-data = {'name': 'Alice', 'city': 'NYC'}
-
-# WRONG: Unquoted key (treated as variable name, causes error)
-name_var = 'Alice'
-data = {name_var: 'Alice'}  # Key is actually 'Alice' (value of name_var)
-
-# CORRECT: If you want string literal as key
-data = {'name_var': 'Alice'}  # 'name_var' is the key
+person = {name: Alice}  # Error - thinks they're variables
 ```
 
-### Error 5: Assuming dicts are ordered (pre-Python 3.7)
+CORRECT
 ```python
-# In Python 3.7+, dicts maintain insertion order
-d = {'z': 1, 'a': 2, 'm': 3}
-print(list(d.keys()))  # ['z', 'a', 'm'] (order is preserved)
+person = {'name': 'Alice'}  # Strings are quoted
+```
 
-# But in older Python, order wasn't guaranteed
-# Use OrderedDict if you need guaranteed order in older versions
-from collections import OrderedDict
-d = OrderedDict([('z', 1), ('a', 2)])
+4) Numbers can be keys (no quotes needed)
+
+```python
+ages = {1: 'Alice', 2: 'Bob', 3: 'Charlie'}
+print(ages[1])  # Alice
 ```
 
 ## Tips
-- Keys must be immutable (strings, numbers, tuples).
-- Keys must be unique (duplicates overwrite).
-- Values can be any type (mutable or immutable).
-- Use descriptive key names.
+- Use **`{key: value}`** syntax
+- Keys are usually **strings** or **numbers**
+- Keys must be **unique**
+- Access values with **`dict[key]`**
+
+## Real-World: Phone Book
+
+```python
+phones = {
+    'Alice': '555-1001',
+    'Bob': '555-1002',
+    'Charlie': '555-1003'
+}
+
+print(phones['Alice'])  # 555-1001
+```
 
 ## Related Concepts
 - [[Python - Dicts - Accessing Values]]
-- [[Python - Dicts - Keys & Values]]
-- [[Python - Dicts - Modification & Methods]]
+- [[Python - Dicts - Methods & Operations]]
+- [[Python - Data Structures - When to use lists vs dicts]]
+
+## MOC
+- Parent: [[Python - Dicts (MOC)]]
 
 ## MOC
 - Parent: [[Python - Dicts (MOC)]]
