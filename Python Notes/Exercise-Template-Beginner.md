@@ -8,12 +8,16 @@ difficulty: Beginner
 Purpose: Copy this file and replace the placeholders to create a new exercise file that matches the project's format.
 
 See concept: [[REPLACE_WITH_CONCEPT_FILENAME]]  # e.g. [[Python - Lists - Creation & Initialization]]
+GitHub link: [REPLACE_WITH_CONCEPT_FILENAME](./REPLACE_WITH_CONCEPT_FILENAME.md)  # e.g. [Python - Lists - Creation & Initialization](./Python%20-%20Lists%20-%20Creation%20%26%20Initialization.md)
 
 Notes for authors (short):
-- Use clear, full variable names in starter code. Avoid short forms like `fn` — use `filename` or add a short inline comment, e.g. `fn = input()  # fn (filename) means the file name to open`.
+- Use clear, full variable names in starter code. Avoid short forms like `fn` — use `filename` and add a short inline comment, e.g. `filename = input()  # filename means the file name to open`.
+- For GitHub compatibility: include both the wiki-style link `[[Note Name]]` and a relative link that uses URL-encoding for special characters (spaces -> `%20`, `&` -> `%26`). Example:
+	- `See concept: [[Python - Lists - Creation & Initialization]]`
+	- `GitHub link: [Python - Lists - Creation & Initialization](./Python%20-%20Lists%20-%20Creation%20%26%20Initialization.md)`
 - Keep language simple and sentences short (suitable for young ESL learners).
 - Each exercise file must include: 3 quick syntax-fix problems, Easy a/b, Medium a/b, Hard single. Each problem must include two separate code blocks: Input example and Output example, a starter code block with `# TODO`, and an answer inside a hidden toggle (`<details><summary>Answer</summary>...</details>`). Add a concise or even one-line explanation after the answer.
-- Do not require advanced functions or concepts in the blanks. Starter code can use simple TODO comments for the student.
+- Do not require advanced functions or concepts in the blanks. Starter code can use simple `# TODO` comments for the student. Avoid requiring list comprehensions, lambda, generator expressions, or advanced parameters in starter blanks unless the concept page explicitly teaches them. Answers may show a clear, simple solution; prefer explicit loops and simple statements so learners can follow.
 
 ---
 
