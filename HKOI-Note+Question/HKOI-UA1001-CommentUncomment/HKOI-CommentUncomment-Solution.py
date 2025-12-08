@@ -1,0 +1,5 @@
+print("Hello")
+# print("I am bobby")
+print("I am anna")
+print("I am 10 years old")
+# print("I am 12")

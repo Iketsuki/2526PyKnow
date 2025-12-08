@@ -8,28 +8,49 @@ You can create todos in Foam.
   - [ ] You can also select multiple lines and mark them all at once!
 
 ## Automated edits progress
+1. Shopping Discount
 
-- Common Errors insertion: 77/137 notes updated; remaining: 60 notes — continuing with Strings batch.
-UA1019P: Basic if Statement
+Inputs: Item price (float), discount rate (int, percent)
+Logic: Calculate final price after discount; if price after discount > 100, print “Expensive”, else print “Affordable”
+Output: Final price and affordability message
+2. Age Group Classification
 
-Teach: How to use a simple if to check a condition and execute code if true.
-Example Exercise: Print "Positive" if the input number is greater than 0.
-UA1020P: if-else Structure
+Inputs: Age (int)
+Logic: Use if-elif-else to classify as “Child” (<13), “Teenager” (13–19), “Adult” (20–64), “Senior” (65+)
+Output: Age group
+3. Grade Pass/Fail
 
-Teach: How to use if-else to choose between two actions.
-Example Exercise: Print "Even" if the input number is even, otherwise print "Odd".
-UA1021P: elif for Multiple Conditions
+Inputs: Score (int)
+Logic: If score >= 50, print “Pass”; else print “Fail”
+Output: Pass/Fail message
+4. Ticket Eligibility
 
-Teach: How to use elif for more than two possible outcomes.
-Example Exercise: Print "Positive" if input > 0, "Negative" if input < 0, "Zero" if input == 0.
-UA1022P: Comparison Operators
+Inputs: Age (int), has student card (True/False string)
+Logic: If age < 18 or has student card, print “Eligible for student ticket”; else print “Regular ticket”
+Output: Ticket type
+5. Simple Calculator
 
-Teach: How to use ==, !=, <, >, <=, >= in conditions.
-Example Exercise: Check if two input numbers are equal, print "Equal" or "Not equal".
-UA1022P: Comparison Operators
+Inputs: Two numbers (float), operation (string: “add”, “sub”, “mul”, “div”)
+Logic: Perform the operation and print the result
+Output: Calculation result
+6. Bus Fare Calculation
 
-Teach: How to use ==, !=, <, >, <=, >= in conditions.
-Example Exercise: Check if two input numbers are equal, print "Equal" or "Not equal".
+Inputs: Age (int), distance (float)
+Logic: If age < 12 or age >= 65, fare = distance * 0.5; else fare = distance * 1.0
+Output: Fare amount
+7. Temperature Alert
+
+Inputs: Temperature (float)
+Logic: If temp < 0, print “Freezing”; elif temp > 35, print “Hot”; else print “Normal”
+Output: Alert message
+Each problem should include:
+
+Clear input/output specification
+Story context
+Sample test cases (including edge/boundary cases)
+Starter code
+Let me know if you want a full file set for any specific scenario!
+
 UA1023P: Boolean Logic (and, or, not)
 
 Teach: How to combine conditions using and, or, not.
