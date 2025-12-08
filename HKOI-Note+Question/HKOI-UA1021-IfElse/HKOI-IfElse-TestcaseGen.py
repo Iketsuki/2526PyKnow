@@ -14,12 +14,15 @@ def gen_case(n, idx):
             fout.write("Odd\n")
 
 def main():
-    # Sample cases
-    gen_case(4, '1-1')
-    gen_case(7, '1-2')
+    # Boundary and edge cases
+    gen_case(0, '1-1')        # zero
+    gen_case(1, '1-2')        # just above zero
+    gen_case(-1, '1-3')       # just below zero
+    gen_case(1000, '1-4')     # max
+    gen_case(-1000, '1-5')    # min
     # Random cases
     import random
-    for i in range(3, 11):
+    for i in range(6, 11):
         n = random.randint(-1000, 1000)
         gen_case(n, f"1-{i}")
 

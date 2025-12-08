@@ -15,12 +15,17 @@ def gen_case(n, idx):
             fout.write("Out of range\n")
 
 def main():
-    # Sample cases
-    gen_case(15, '1-1')
-    gen_case(9, '1-2')
-    gen_case(20, '1-3')
+    # Boundary and edge cases
+    gen_case(10, '1-1')       # lower bound
+    gen_case(20, '1-2')       # upper bound
+    gen_case(9, '1-3')        # just below lower
+    gen_case(21, '1-4')       # just above upper
+    gen_case(0, '1-5')        # zero
+    gen_case(1000, '1-6')     # max
+    gen_case(-1000, '1-7')    # min
     # Random cases
-    for i in range(4, 11):
+    import random
+    for i in range(8, 11):
         n = random.randint(-1000, 1000)
         gen_case(n, f"1-{i}")
 
